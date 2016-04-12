@@ -1,0 +1,224 @@
+html, body {
+  color: #656565;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  background: #f4f4f4;
+  align-items: center;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+hr {
+  border: 1px solid #dcdddf;
+}
+
+.input {
+  margin-bottom: 8px;
+  margin-right: 24px;
+  display: inline-block;
+  vertical-align: top;
+
+  label {
+    margin-right: 8px;
+  }
+  input[type="text"],
+  input[type="number"] {
+    border-radius: 4px;
+    border: 1px solid #dcdddf;
+    padding: 4px 8px;
+  }
+  .help_text {
+    font-size: 11px;
+    color: gray;
+    margin-top: 2px;
+  }
+  &.__required {
+    label {
+      font-weight: bold;
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  .tabs_i {
+    padding: 10px 30px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    text-transform: uppercase;
+    &.__active {
+      border-bottom: 2px solid #4CAF50;
+      cursor: default;
+    }
+  }
+}
+.tab_content {
+  margin-top: 16px;
+}
+
+.main {
+  width: 100%;
+  display: block;
+}
+
+.settings {
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  background: white;
+  padding: 0 16px 24px;
+  position: relative;
+
+  select {
+    float: left;
+  }
+  .status {
+    margin-left: 16px;
+    padding: 2px 8px;
+    border: 1px solid #F44336 ;
+    color: #F44336 ;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-block;
+
+
+    &.__online {
+      color: #4CAF50;
+      border-color: #4CAF50;
+    }
+  }
+}
+
+.app {
+  margin: auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  background: white;
+  padding: 24px 16px;
+  position: relative;
+
+  .panel {
+    margin-bottom: 16px;
+    position: relative;
+    width: 100%;
+
+    select {
+      verical-align: middle;
+      margin-right: 8px;
+      font-size: 20px;
+    }
+
+    .panel_send {
+      box-shadow: none;
+      background: transparent;
+      color: #4CAF50 ;
+      border: 1px solid #4CAF50;
+      border-radius: 4px;
+      padding: 3px 12px;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+    .settings_btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+
+      i {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .params {
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  .response {
+    .title {
+      margin-bottom: 4px;
+    }
+    .error {
+      margin-bottom: 8px;
+      background: #E57373;
+      color: white;
+      border-radius: 4px;
+      padding: 4px 16px;
+
+    }
+  }
+
+  .logs {
+    .log {
+      padding: 4px 12px;
+      background: #fafafa;
+      border-radius: 4px;
+      margin-bottom: 8px;
+
+      &.request {
+      }
+      &.response {
+        background: rgba(253, 213, 53, 0.37);
+      }
+      &.error {
+        color: red;
+      }
+      .type {
+        text-transform: capitalize ;
+        font-size: 13px;
+      }
+      .created {
+        float: right;
+        font-size: 13px;
+      }
+      .log_data {
+        height: 350px;
+      }
+    }
+  }
+
+}
+
+
+/* Styling of the editor */
+.jsoneditor {
+  border: none!important;
+
+  .jsoneditor-menu {
+    border: none!important;
+  }
+
+  div.jsoneditor-menu {
+    background-color: #4b4b4b!important;
+    background:transparent!important;
+
+    button, jsoneditor-modes button {
+      background-color: #e8e8e8!important;
+      color: #4b4b4b!important;
+    }
+    .jsoneditor-search {
+      button {
+        background-color: transparent!important;
+      }
+    }
+  }
+  .jsoneditor-outer {
+    .ace_editor  {
+      .ace_gutter {
+        background: none!important;
+      }
+    }
+  }
+
+  table.jsoneditor-search div.jsoneditor-frame {
+    background: #fafafa!important;
+    border-radius: 4px!important;
+  }
+}

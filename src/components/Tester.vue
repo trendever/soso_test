@@ -1,0 +1,283 @@
+<style lang="less" src="./style.less"></style>
+<template>
+  <div :style="{width: frame_width}" class="main">
+
+    <div class="settings" v-show="settings_show">
+        <div class="tabs">
+          <div class="tabs_i"
+               @click="settings_tab='main'"
+               :class="{'__active': settings_tab=='main'}">
+            Main
+          </div>
+          <div class="tabs_i"
+               @click="settings_tab='api'"
+               :class="{'__active': settings_tab=='api'}">
+            API</div>
+        </div>
+
+        <div class="tab_content" v-show="settings_tab=='main'">
+          <div>Main Settings</div><br>
+          <select v-model="socket_url" v-on:change="sock.close()">
+            <option value="http://api.dev2.trendever.com:8085/channel" selected>dev2</option>
+            <option value="localhost:8081/channel">localhost:8081</option>
+          </select>
+          <div class="status"
+               @click="InitSock()"
+               :class="{'__online': connected}">
+            <span v-if="connected">online</span>
+            <span v-if="!connected">connect</span>
+          </div>
+          <br><br>
+          <div class="input">
+            <label>Frame width </label>
+            <input type="text" v-model="frame_width" debounce="500">
+            <div class="help_text">Example: 100% - responsive</div>
+          </div>
+          <br><br>
+          <div class="input">
+            <label>Auth Token </label>
+            <input type="text" v-model="auth_token" debounce="500">
+            <div class="help_text">Get from Auth/Login. Will set for every request.</div>
+          </div>
+        </div>
+
+        <div class="tab_content" v-show="settings_tab=='api'">
+          <div>API Settings</div><br>
+          <div id="api_editor"
+               style="height: 500px"
+          ></div>
+        </div>
+      </div>
+
+        <div class="app">
+          <div class="panel">
+            <select v-model="resourse">
+              <option v-for="item in resourses" v-bind:value="item">
+                {{ item.name | capitalize }}
+              </option>
+            </select>
+
+            <select v-model="action">
+              <option v-for="item in actions" v-bind:value="item">
+                {{ item.name | capitalize }}
+              </option>
+            </select>
+
+            <button class="panel_send" @click="Send">Send</button>
+
+            <div class="settings_btn" @click="settings_show=!settings_show">
+              <i class="material-icons">settings</i>
+            </div>
+          </div>
+
+          <div class="params">
+            <div class="input"
+                 v-bind:class="{'__required': param.required}"
+                 v-for="param in action.params">
+              <label for="field_{{ param.name }}">{{ param.name }}</label>
+              <input type="{{param.type | to_field}}" id="field_{{ param.name }}" v-model="param.value" :value="param.default">
+              <div class="help_text">{{param.help_text}}</div>
+            </div>
+          </div>
+
+          <div class="response">
+            <div class="title">Last Response</div>
+            <div class="error" v-if="error.length">
+              Error: {{ error }}
+            </div>
+
+            <div id="reponse_editor"
+               style="height: 500px"></div>
+          </div>
+
+          <div class="logs" v-if="logs.length>0">
+            <div>Logs
+              <span style="float:right;cursor:pointer;"
+                    @click="logs=[]">
+                очистить</span></div><hr>
+            <div class="log" :class="log.type" v-for="log in logs">
+              <span class="type">{{log.type}}</span>
+              <span class="created">{{log.created}}</span>
+              <div class="log_data" :id="log.id"></div>
+            </div>
+          </div>
+        </div>
+
+  </div>
+</template>
+
+<script>
+
+import Vue from 'vue'
+import {CONFIG} from '../../resourses.js'
+
+Vue.filter('to_field', function (value) {
+  var parts = value.split('|');
+  if (parts.length == 2) {
+    // it's array of type
+    return "text";
+  }
+  var type = parts[0];
+  if (type == "string") {
+    return "text";
+  } else if (type == "number") {
+    return "number";
+  } else if (type == "boolean") {
+    return "checkbox";
+  }
+  console.log("Unsupported param type", type, "of", value);
+});
+
+export default {
+  data () {
+    return {
+      config: CONFIG,
+      resourses: null,
+      resourse: null,
+      action: null,
+      socket_url:null,
+      sock: null,
+      error: "",
+      request: "",
+      reponse_editor: null,
+      editor_settings: {
+        mode: "view",
+        modes: ['view', 'code'],
+        history: false,
+      },
+      connected: false,
+      logs: [],
+      // Settings
+      settings_tab: "main",
+      settings_show: false,
+      frame_width: "700px",
+      auth_token: null
+    }
+  },
+  computed: {
+    actions: function(){
+      var actions = this.resourse.actions;
+      this.action = actions[0];
+      return actions;
+    }
+  },
+  ready: function() {
+    this.InitSock();
+    this.InitApiSettings();
+    this.reponse_editor = new JSONEditor(
+        document.getElementById('reponse_editor'),
+        this.editor_settings
+    );
+  },
+  methods: {
+    InitSock: function(){
+      this.sock = SockJS(this.socket_url);
+      this.sock.onmessage = this.receive;
+      this.sock.onopen = this.open;
+      this.sock.onclose = this.close;
+    },
+    open: function() {
+      this.connected = true;
+      this.error = null;
+    },
+    close: function(err){
+      this.connected = false;
+      this.error = err.reason;
+    },
+    receive: function(resp) {
+      var response = JSON.parse(resp.data);
+      this.log("response", response);
+      this.reponse_editor.set(response);
+      this.error = null;
+    },
+    send: function(request_obj) {
+      this.sock.send(JSON.stringify(request_obj));
+    },
+    Send: function(){
+      var request_map = {},
+          trans_map = {},
+          params = this.action.params;
+
+      // Set Auth token, if set in settings
+      if (this.auth_token && this.auth_token) {
+        trans_map["token"] = this.auth_token;
+      }
+
+      for (var i=0; i < params.length; i++){
+        var param = params[i];
+        if (!param.value || param.value == param.default) {
+          continue;
+        }
+        request_map[param.name] = this.convertType(param.value, param.type);
+      }
+      var data = {
+        action_str: this.action.name,
+        data_type: this.resourse.name,
+        log_list:[],
+        request_map: request_map,
+        trans_map:trans_map
+      };
+      this.log("request", data);
+      this.send(data);
+    },
+    InitApiSettings: function() {
+      var self = this;
+      // Init editor and watch changes
+      this.api_editor = new JSONEditor(
+        document.getElementById('api_editor'),
+        {
+          mode: "code",
+          modes: ['tree', 'code'],
+          onChange: function() {
+            self.resourses = self.api_editor.get();
+            self.resourse = self.resourses[0];
+          }
+        }
+      );
+      // Set resourses
+      self.resourses = this.config.resourses;
+      self.resourse = self.resourses[0];
+      this.api_editor.set(this.config.resourses);
+    },
+    convertType: function(value, type) {
+      try {
+        var parts = type.split('|');
+        if (parts.length == 2) {
+          // it's array of type
+          return JSON.parse(value);
+        }
+        var _type = parts[0];
+        if (type == "string") {
+          return value;
+        } else if (_type == "number") {
+          return parseInt(value);
+        } else if (_type == "boolean") {
+          return value;
+        }
+      } catch (err) {
+        this.error = "Error parse: " +
+          value + " Msg: " + err.message;
+        return;
+      }
+    },
+    log: function(type, data) {
+      var self = this;
+      var id = "log_" + new Date().getTime();
+      this.logs.push({
+        type: type,
+        id: id,
+        created: new Date().toLocaleString(),
+      });
+      setTimeout(function(){
+        console.log(this.editor_settings);
+        var _editor = new JSONEditor(
+          document.getElementById(id),
+          self.editor_settings
+        );
+        _editor.set(data);
+      }, 10);
+    }
+  }
+
+}
+</script>
