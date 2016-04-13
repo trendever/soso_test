@@ -66,30 +66,19 @@ export const CONFIG = {
             name: "lead",
             actions: [
                 {
-                    name: "create",
-                    params: [
+                    "name": "create",
+                    "params": [
                         {
-                            name: "ids",
-                            type: "number|array",
-                            help_text: "Например: [1, 42, 3]",
-                            required: true
-                        },
-                        {
-                            name: "email",
-                            type: "string",
-                            required: true
-                        },
-                        {
-                            name: "comment",
-                            type: "string",
-                            required: true
+                            "name": "id",
+                            "type": "number",
+                            "help_text": "ID продукта. Например: 42",
+                            "required": true
                         }
                     ]
                 },
                 {
                     "name": "list",
-                    "params": [
-                    ]
+                    "params": []
                 },
                 {
                     "name": "event",
@@ -102,7 +91,7 @@ export const CONFIG = {
                         {
                             "name": "event",
                             "type": "string",
-                            "help_text":"Доступные события: CREATE, PROGRESS, SUBMIT, DELIVERY, COMPLETE, CANCEL",
+                            "help_text": "Доступные события: CREATE, PROGRESS, SUBMIT, DELIVERY, COMPLETE, CANCEL",
                             "required": true
                         }
                     ]
@@ -187,11 +176,11 @@ export const CONFIG = {
                 },
                 {
                     "name": "list",
-                    "params":[]
+                    "params": []
                 },
                 {
                     "name": "call_supplier",
-                    "params":[
+                    "params": [
                         {
                             "name": "lead_id",
                             "type": "number",
