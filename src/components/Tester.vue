@@ -1,109 +1,81 @@
 <style lang="less" src="./style.less"></style>
-<template>
-  <div :style="{width: frame_width}" class="main">
+<template lang="jade">
+.main(:style='{width: frame_width}')
+  .settings(v-show='settings_show')
+    .tabs
+      .tabs_i(@click="settings_tab='main'", :class="{'__active': settings_tab=='main'}")
+        | Main
+      .tabs_i(@click="settings_tab='api'", :class="{'__active': settings_tab=='api'}")
+        | API
+    .tab_content(v-show="settings_tab=='main'")
+      div Main Settings
+      br
+      select(v-model='socket_url', v-on:change='sock.close()')
+        option(value='http://api.dev2.trendever.com:8085/channel', selected='') dev2
+        option(value='localhost:8081/channel') localhost:8081
+      .status(@click='InitSock()', :class="{'__online': connected}")
+        span(v-if='connected') online
+        span(v-if='!connected') connect
+      br
+      br
+      .input
+        label Frame width
+        input(type='text', v-model='frame_width', debounce='500')
+        .help_text Example: 100% - responsive
+      br
+      br
+      .input
+        label Auth Token
+        input(type='text', v-model='auth_token', debounce='500')
+        .help_text Get from Auth/Login. Will set for every request.
+    .tab_content(v-show="settings_tab=='api'")
+      div API Settings
+      br
+      #api_editor(style='height: 500px')
+  .app
+    .panel
+      select(v-model='resourse')
+        option(v-for='item in resourses', v-bind:value='item')
+          | {{ item.name | capitalize }}
+      select(v-model='action')
+        option(v-for='item in actions', v-bind:value='item')
+          | {{ item.name | capitalize }}
+      button.panel_send(@click='Send') Send
+      .settings_btn(@click='settings_show=!settings_show')
+        i.material-icons settings
+    .params
 
-    <div class="settings" v-show="settings_show">
-        <div class="tabs">
-          <div class="tabs_i"
-               @click="settings_tab='main'"
-               :class="{'__active': settings_tab=='main'}">
-            Main
-          </div>
-          <div class="tabs_i"
-               @click="settings_tab='api'"
-               :class="{'__active': settings_tab=='api'}">
-            API</div>
-        </div>
+      .input(v-bind:class="{'__required': param.required}",
+             v-for='param in action.params')
+        label(for='field_{{ param.name }}') {{ param.name }}
+        input(type='{{param.type | to_field}}',
+              id='field_{{ param.name }}',
+              v-model='param.value',
+              :value='param.default')
+        .help_text {{param.help_text}}
 
-        <div class="tab_content" v-show="settings_tab=='main'">
-          <div>Main Settings</div><br>
-          <select v-model="socket_url" v-on:change="sock.close()">
-            <option value="http://api.dev2.trendever.com:8085/channel" selected>dev2</option>
-            <option value="localhost:8081/channel">localhost:8081</option>
-          </select>
-          <div class="status"
-               @click="InitSock()"
-               :class="{'__online': connected}">
-            <span v-if="connected">online</span>
-            <span v-if="!connected">connect</span>
-          </div>
-          <br><br>
-          <div class="input">
-            <label>Frame width </label>
-            <input type="text" v-model="frame_width" debounce="500">
-            <div class="help_text">Example: 100% - responsive</div>
-          </div>
-          <br><br>
-          <div class="input">
-            <label>Auth Token </label>
-            <input type="text" v-model="auth_token" debounce="500">
-            <div class="help_text">Get from Auth/Login. Will set for every request.</div>
-          </div>
-        </div>
+      .description
+        .toggle(@click="isVisibleDescription=!isVisibleDescription")
+          span(v-if="!isVisibleDescription") Show description
+          span(v-if="isVisibleDescription") Hide description
+        .cnt(v-if="isVisibleDescription")
+          | {{{ action.description }}}
 
-        <div class="tab_content" v-show="settings_tab=='api'">
-          <div>API Settings</div><br>
-          <div id="api_editor"
-               style="height: 500px"
-          ></div>
-        </div>
-      </div>
-
-        <div class="app">
-          <div class="panel">
-            <select v-model="resourse">
-              <option v-for="item in resourses" v-bind:value="item">
-                {{ item.name | capitalize }}
-              </option>
-            </select>
-
-            <select v-model="action">
-              <option v-for="item in actions" v-bind:value="item">
-                {{ item.name | capitalize }}
-              </option>
-            </select>
-
-            <button class="panel_send" @click="Send">Send</button>
-
-            <div class="settings_btn" @click="settings_show=!settings_show">
-              <i class="material-icons">settings</i>
-            </div>
-          </div>
-
-          <div class="params">
-            <div class="input"
-                 v-bind:class="{'__required': param.required}"
-                 v-for="param in action.params">
-              <label for="field_{{ param.name }}">{{ param.name }}</label>
-              <input type="{{param.type | to_field}}" id="field_{{ param.name }}" v-model="param.value" :value="param.default">
-              <div class="help_text">{{param.help_text}}</div>
-            </div>
-          </div>
-
-          <div class="response">
-            <div class="title">Last Response</div>
-            <div class="error" v-if="error.length">
-              Error: {{ error }}
-            </div>
-
-            <div id="reponse_editor"
-               style="height: 500px"></div>
-          </div>
-
-          <div class="logs" v-if="logs.length>0">
-            <div>Logs
-              <span style="float:right;cursor:pointer;"
-                    @click="logs=[]">
-                очистить</span></div><hr>
-            <div class="log" :class="log.type" v-for="log in logs">
-              <span class="type">{{log.type}}</span>
-              <span class="created">{{log.created}}</span>
-              <div class="log_data" :id="log.id"></div>
-            </div>
-          </div>
-        </div>
-
-  </div>
+    .response
+      .title Last Response
+      .error(v-if='error.length')
+        | Error: {{ error }}
+      #reponse_editor(style='height: 500px')
+    .logs(v-if='logs.length>0')
+      div
+        | Logs
+        span(style='float:right;cursor:pointer;', @click='logs=[]')
+          | очистить
+      hr
+      .log(:class='log.type', v-for='log in logs')
+        span.type {{log.type}}
+        span.created {{log.created}}
+        .log_data(:id='log.id')
 </template>
 
 <script>
@@ -140,6 +112,7 @@ export default {
       error: "",
       request: "",
       reponse_editor: null,
+      isVisibleDescription: true,
       editor_settings: {
         mode: "view",
         modes: ['view', 'code'],

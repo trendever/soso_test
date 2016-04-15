@@ -1,0 +1,28 @@
+{
+  "folders":
+  [
+    {
+      "path": ".",
+      "name": "root",
+      "folder_exclude_patterns": [".idea", "node_modules"],
+      "file_exclude_patterns": ["*.iml"]
+    },
+    {
+      "path": "src",
+      "name": "source",
+      "folder_exclude_patterns": [".idea"],
+    },
+  ],
+  "settings": {
+    "tab_size": 2,
+    "translate_tabs_to_spaces": true,
+
+    "PostCSSSorting": {
+      "sort-order": "yandex",
+      "empty-lines-between-children-rules": 0,
+      "sort-on-save": true
+    }
+  },
+
+}
+
