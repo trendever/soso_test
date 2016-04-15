@@ -124,6 +124,10 @@ export const CONFIG = {
           "name": "text",
           "type": "string",
           "required": true
+        }, {
+          "name": "mime_type",
+          "type": "string",
+          "help_text": "по умолчанию text/plain"
         }]
       }, {
         "name": "history",
