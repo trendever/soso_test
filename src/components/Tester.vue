@@ -43,16 +43,17 @@
       button.panel_send(@click='Send') Send
       .settings_btn(@click='settings_show=!settings_show')
         i.material-icons settings
-    .params
 
-      .input(v-bind:class="{'__required': param.required}",
-             v-for='param in action.params')
-        label(for='field_{{ param.name }}') {{ param.name }}
-        input(type='{{param.type | to_field}}',
-              id='field_{{ param.name }}',
-              v-model='param.value',
-              :value='param.default')
-        .help_text {{param.help_text}}
+    .params
+      .param_list(v-if="action.params.length")
+        .input(v-bind:class="{'__required': param.required}",
+               v-for='param in action.params')
+          label(for='field_{{ param.name }}') {{ param.name }}
+          input(type='{{param.type | to_field}}',
+                id='field_{{ param.name }}',
+                v-model='param.value',
+                :value='param.default')
+          .help_text {{param.help_text}}
 
       .description
         .toggle(@click="isVisibleDescription=!isVisibleDescription")
