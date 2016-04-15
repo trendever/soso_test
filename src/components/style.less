@@ -185,11 +185,24 @@ hr {
         background: rgba(253, 213, 53, 0.37);
       }
       &.error {
-        color: red;
+        color: red !important;
       }
       .type {
         text-transform: capitalize ;
         font-size: 13px;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      &.error {
+        .type {
+          color: red !important;
+        }
+      }
+      &.success {
+        .type {
+          color: green !important;
+        }
       }
       .created {
         float: right;

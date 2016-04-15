@@ -26,7 +26,7 @@
       br
       .input
         label Auth Token
-        input(type='text', v-model='auth_token', debounce='500')
+        input(type='text', v-model='auth_token')
         .help_text Get from Auth/Login. Will set for every request.
     .tab_content(v-show="settings_tab=='api'")
       div API Settings
@@ -67,6 +67,7 @@
       .error(v-if='error.length')
         | Error: {{ error }}
       #reponse_editor(style='height: 500px')
+
     .logs(v-if='logs.length>0')
       div
         | Logs
@@ -74,15 +75,18 @@
           | очистить
       hr
       .log(:class='log.type', v-for='log in logs')
-        span.type {{log.type}}
+        span.type(@click='log.show = !log.show')
+          | {{{log.description}}}
         span.created {{log.created}}
-        .log_data(:id='log.id')
+        .log_data(:id='log.id',
+                  v-show='log.show')
 </template>
 
 <script>
 
-import Vue from 'vue'
-import {CONFIG} from '../../resourses.js'
+import Vue from 'vue';
+import * as profile from 'src/services/profile';
+import {CONFIG} from '../../resourses.js';
 
 Vue.filter('to_field', function (value) {
   var parts = value.split('|');
@@ -138,6 +142,7 @@ export default {
   ready: function() {
     this.InitSock();
     this.InitApiSettings();
+    this.auth_token = profile.getProfile().token;
     this.reponse_editor = new JSONEditor(
         document.getElementById('reponse_editor'),
         this.editor_settings
@@ -173,7 +178,7 @@ export default {
           params = this.action.params;
 
       // Set Auth token, if set in settings
-      if (this.auth_token && this.auth_token) {
+      if (this.auth_token) {
         trans_map["token"] = this.auth_token;
       }
 
@@ -237,9 +242,34 @@ export default {
     log: function(type, data) {
       var self = this;
       var id = "log_" + new Date().getTime();
+
+      if (!data.log_list) {
+        data.log_list = [{}];
+      }
+      var description =
+      " <span style='color: #2196F3'>" +
+      data.action_str + "</span>" +
+
+      " <span style='color: #FF9800'>" +
+      data.data_type + "</span>"
+
+      if (data.log_list.length) {
+        description +=
+        " <span style='color: #5E35B1'>" +
+        data.log_list[0].code_str + "</span>" +
+
+        " <span style='color: #5E35B1'>" +
+        data.log_list[0].level_str + "</span>   " +
+
+        " <span style='color: gray'>" +
+        data.log_list[0].user_msg.substr(0, 40) + "...</span>";
+      }
+
       this.logs.push({
-        type: type,
-        id: id,
+        type,
+        description,
+        id,
+        show: false,
         created: new Date().toLocaleString(),
       });
       setTimeout(function(){
@@ -250,6 +280,14 @@ export default {
         );
         _editor.set(data);
       }, 10);
+    }
+  },
+
+  watch: {
+    auth_token: function() {
+      // if (this.auth_token && this.auth_token.length > 0) {
+        profile.setToken(this.auth_token);
+      // }
     }
   }
 
