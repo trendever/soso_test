@@ -148,7 +148,15 @@ export const CONFIG = {
                 "params": []
             }, {
                 "name": "call_supplier",
-                description: "Вложить описание",
+                description: "Позвать поставщика",
+                "params": [{
+                    "name": "lead_id",
+                    "type": "number",
+                    "required": true
+                }]
+            }, {
+                "name": "call_customer",
+                description: "Позвать покупателя",
                 "params": [{
                     "name": "lead_id",
                     "type": "number",
