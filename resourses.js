@@ -66,6 +66,19 @@ export const CONFIG = {
                 description: "Вложить описание",
                 "params": []
             }, {
+                "name": "retrieve",
+                description: "Возвращает полную информацию о lead, по его lead_id или conversation_id",
+                "params": [
+                    {
+                        "name": "lead_id",
+                        "type": "number"
+                    },
+                    {
+                        "name": "conversation_id",
+                        "type": "number"
+                    }
+                ]
+            }, {
                 "name": "event",
                 description: "Вложить описание",
                 "params": [{
