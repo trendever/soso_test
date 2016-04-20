@@ -185,6 +185,19 @@ export const CONFIG = {
                         "type": "string",
                         "help_text": "по умолчанию text/plain"
                     }]
+                },
+                {
+                    "name": "update",
+                    description: "Пометить сообщение прочтенным",
+                    "params": [{
+                        "name": "conversation_id",
+                        "type": "number",
+                        "required": true
+                    }, {
+                        "name": "message_id",
+                        "type": "number",
+                        "required": true
+                    }]
                 }
             ]
         },
