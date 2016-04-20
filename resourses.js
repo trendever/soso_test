@@ -63,8 +63,19 @@ export const CONFIG = {
                 }]
             }, {
                 "name": "list",
-                description: "Вложить описание",
-                "params": []
+                description: "Возвращает список лидов пользователя с информацией о продуктах и чату",
+                "params": [
+                    {
+                        "name": "limit",
+                        "type": "number",
+                        "help_text": "Сколько лидов за раз вернуть, по умолчанию 20"
+                    },
+                    {
+                        "name": "from_lead_id",
+                        "type": "number",
+                        "help_text": "ID лида от которого нужно начать выборку (не вклюачя этот ID), работает только если явно задан лимит"
+                    }
+                ]
             }, {
                 "name": "retrieve",
                 description: "Возвращает полную информацию о lead, по его lead_id или conversation_id",
@@ -168,7 +179,7 @@ export const CONFIG = {
         {
             name: "message",
             description: "Сообщения чата",
-            actions:[
+            actions: [
                 {
                     "name": "create",
                     description: "Отправка сообщения участинам чата",
