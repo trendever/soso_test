@@ -268,7 +268,9 @@ export default {
         }
       }
 
-      description += ` ${new Date().getTime() - data.trans_map.sendedAt}ms`;
+      if (type === 'response') {
+        description += ` <span style='color: #2196F3'>${new Date().getTime() - data.trans_map.sendedAt}ms</span>`;
+      }
 
       this.logs.push({
         type,
