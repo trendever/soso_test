@@ -179,8 +179,9 @@ export default {
 
       // Set Auth token, if set in settings
       if (this.auth_token) {
-        trans_map["token"] = this.auth_token;
+        trans_map.token = this.auth_token;
       }
+      trans_map.sendedAt = new Date().getTime();
 
       for (var i=0; i < params.length; i++){
         var param = params[i];
@@ -253,17 +254,21 @@ export default {
       " <span style='color: #FF9800'>" +
       data.data_type + "</span>"
 
-      if (data.log_list.length) {
+      if (data.log_list.length > 0) {
         description +=
         " <span style='color: #5E35B1'>" +
         data.log_list[0].code_str + "</span>" +
 
         " <span style='color: #5E35B1'>" +
-        data.log_list[0].level_str + "</span>   " +
+        data.log_list[0].level_str + "</span>   "
 
-        " <span style='color: gray'>" +
-        data.log_list[0].user_msg.substr(0, 40) + "...</span>";
+        if (data.log_list[0].user_msg) {
+          description += " <span style='color: gray'>" +
+          data.log_list[0].user_msg.substr(0, 40) + "...</span>";
+        }
       }
+
+      description += ` ${new Date().getTime() - data.trans_map.sendedAt}ms`;
 
       this.logs.push({
         type,
