@@ -4,19 +4,32 @@ export const CONFIG = {
         name: "product",
         actions: [{
             name: "retrieve",
-            description: "Вложить описание. Можно <b>с тэгами</b>. Вложить описание. Можно <b>с тэгами</b>. Вложить описание. Можно <b>с тэгами</b>. Вложить описание. Можно <b>с тэгами</b>. Вложить описание. Можно <b>с тэгами</b>.",
+            description: "Получение продукта по ID",
+            params: [{
+                name: "id",
+                type: "number"
+            }]
+        }, {
+            name: "search",
+            description: "Поиск продуктов",
             params: [{
                 name: "limit",
                 type: "number",
                 default: 9,
-                required: true,
+                required: true
             }, {
                 name: "offset",
                 type: "number",
                 default: 0
             }, {
-                name: "id",
-                type: "number"
+                name: "from_id",
+                type: "number",
+                help_text: "ID продукта с которого начинать поиск (не включая этот продукт). Не работает, если указан offset"
+            }, {
+                name: "direction",
+                type: "boolean",
+                help_text: "Направление сортировки, false - desc, true - asc. ",
+                default: false
             }, {
                 name: "q",
                 type: "string",
