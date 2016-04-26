@@ -42,9 +42,17 @@ export const CONFIG = {
                 type: "number",
                 help_text: "ID пользователя. Вернет продукты которые упоминал пользватель, или которые лайкнул"
             }, {
+                name: "user_instagram_name",
+                type: "string",
+                help_text: "Instagram username пользователя. Вернет продукты которые упоминал пользватель, или которые лайкнул"
+            }, {
                 name: "shop_id",
                 type: "number",
                 help_text: "ID магазина, вернет продукты магазина"
+            }, {
+                name: "shop_instagram_name",
+                type: "string",
+                help_text: "Instagram username магазина, вернет продукты магазина"
             }, {
                 name: "direction",
                 type: "boolean",
