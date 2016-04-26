@@ -268,7 +268,7 @@ export default {
         }
       }
 
-      if (type === 'response') {
+      if (type === 'response' && data.trans_map && data.trans_map.sendedAt) {
         description += ` <span style='color: #2196F3'>${new Date().getTime() - data.trans_map.sendedAt}ms</span>`;
       }
 
