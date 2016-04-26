@@ -10,6 +10,18 @@ export const CONFIG = {
                 type: "number"
             }]
         }, {
+            name: "like",
+            description: "Лайкнуть продукт или забрать лайк",
+            params: [{
+                name: "product_id",
+                type: "number",
+                required: true
+            }, {
+                name: "like",
+                type: "boolean",
+                help_text: "true - поставить лайк, false - забрать лайк",
+            }]
+        }, {
             name: "search",
             description: "Поиск продуктов",
             params: [{
@@ -85,31 +97,25 @@ export const CONFIG = {
             }, {
                 "name": "list",
                 description: "Возвращает список лидов пользователя с информацией о продуктах и чату",
-                "params": [
-                    {
-                        "name": "limit",
-                        "type": "number",
-                        "help_text": "Сколько лидов за раз вернуть, по умолчанию 20"
-                    },
-                    {
-                        "name": "from_lead_id",
-                        "type": "number",
-                        "help_text": "ID лида от которого нужно начать выборку (не вклюачя этот ID), работает только если явно задан лимит"
-                    }
-                ]
+                "params": [{
+                    "name": "limit",
+                    "type": "number",
+                    "help_text": "Сколько лидов за раз вернуть, по умолчанию 20"
+                }, {
+                    "name": "from_lead_id",
+                    "type": "number",
+                    "help_text": "ID лида от которого нужно начать выборку (не вклюачя этот ID), работает только если явно задан лимит"
+                }]
             }, {
                 "name": "retrieve",
                 description: "Возвращает полную информацию о lead, по его lead_id или conversation_id",
-                "params": [
-                    {
-                        "name": "lead_id",
-                        "type": "number"
-                    },
-                    {
-                        "name": "conversation_id",
-                        "type": "number"
-                    }
-                ]
+                "params": [{
+                    "name": "lead_id",
+                    "type": "number"
+                }, {
+                    "name": "conversation_id",
+                    "type": "number"
+                }]
             }, {
                 "name": "event",
                 description: "Вложить описание",
@@ -200,38 +206,35 @@ export const CONFIG = {
         {
             name: "message",
             description: "Сообщения чата",
-            actions: [
-                {
-                    "name": "create",
-                    description: "Отправка сообщения участинам чата",
-                    "params": [{
-                        "name": "conversation_id",
-                        "type": "number",
-                        "required": true
-                    }, {
-                        "name": "text",
-                        "type": "string",
-                        "required": true
-                    }, {
-                        "name": "mime_type",
-                        "type": "string",
-                        "help_text": "по умолчанию text/plain"
-                    }]
-                },
-                {
-                    "name": "update",
-                    description: "Пометить сообщение прочтенным",
-                    "params": [{
-                        "name": "conversation_id",
-                        "type": "number",
-                        "required": true
-                    }, {
-                        "name": "message_id",
-                        "type": "number",
-                        "required": true
-                    }]
-                }
-            ]
+            actions: [{
+                "name": "create",
+                description: "Отправка сообщения участинам чата",
+                "params": [{
+                    "name": "conversation_id",
+                    "type": "number",
+                    "required": true
+                }, {
+                    "name": "text",
+                    "type": "string",
+                    "required": true
+                }, {
+                    "name": "mime_type",
+                    "type": "string",
+                    "help_text": "по умолчанию text/plain"
+                }]
+            }, {
+                "name": "update",
+                description: "Пометить сообщение прочтенным",
+                "params": [{
+                    "name": "conversation_id",
+                    "type": "number",
+                    "required": true
+                }, {
+                    "name": "message_id",
+                    "type": "number",
+                    "required": true
+                }]
+            }]
         },
 
         {
