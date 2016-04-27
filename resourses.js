@@ -285,6 +285,52 @@ export const CONFIG = {
                     help_text: "Одноразовый пароль, который выслали в sms"
                 }]
             }]
+        },
+
+        {
+            "name": "user",
+            "description": "Профиль пользователя",
+            "actions": [
+                {
+                    "name": "retrieve",
+                    "description": "Получения профиля пользователя",
+                    "params": [
+                        {
+                            "name": "instagram_name",
+                            "type": "string",
+                            "help_text": "Instagram username пользователя"
+                        },
+                        {
+                            "name": "user_id",
+                            "type": "number",
+                            "help_text": "ID пользователя в core"
+                        }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "name": "shop",
+            "description": "Профиль магазина",
+            "actions": [
+                {
+                    "name": "retrieve",
+                    "description": "Получения профиля магазина",
+                    "params": [
+                        {
+                            "name": "instagram_name",
+                            "type": "string",
+                            "help_text": "Instagram username магазина"
+                        },
+                        {
+                            "name": "shop_id",
+                            "type": "number",
+                            "help_text": "ID магазина в core"
+                        }
+                    ]
+                }
+            ]
         }
 
     ]
