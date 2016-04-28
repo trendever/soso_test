@@ -164,14 +164,21 @@ export const CONFIG = {
 
         {
             "name": "chat",
-            description: "Вложить описание",
+            description: "Присоединение к чату по ID лида или ID его чата",
             "actions": [{
                 "name": "join",
-                "params": [{
-                    "name": "lead_id",
-                    "type": "number",
-                    "required": true
-                }]
+                "params": [
+                    {
+                        "name": "lead_id",
+                        "type": "number",
+                        "help_text": "ID лида"
+                    },
+                    {
+                        "name": "conversation_id",
+                        "type": "number",
+                        "help_text": "ID чата"
+                    }
+                ]
             }, {
                 "name": "history",
                 description: "Вложить описание",
