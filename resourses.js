@@ -180,22 +180,6 @@ export const CONFIG = {
                     }
                 ]
             }, {
-                "name": "history",
-                description: "Вложить описание",
-                "params": [{
-                    "name": "conversation_id",
-                    "type": "number",
-                    "required": true
-                }, {
-                    "name": "from_message_id",
-                    "type": "number",
-                    "required": false
-                }, {
-                    "name": "limit",
-                    "type": "number",
-                    "required": false
-                }]
-            }, {
                 "name": "list",
                 description: "Вложить описание",
                 "params": []
@@ -249,7 +233,25 @@ export const CONFIG = {
                     "type": "number",
                     "required": true
                 }]
-            }]
+            },
+                {
+                    "name": "search",
+                    description: "История сообщений",
+                    "params": [{
+                        "name": "conversation_id",
+                        "type": "number",
+                        "required": true
+                    }, {
+                        "name": "from_message_id",
+                        "type": "number",
+                        "required": false
+                    }, {
+                        "name": "limit",
+                        "type": "number",
+                        "required": false
+                    }]
+                }]
+
         },
 
         {
