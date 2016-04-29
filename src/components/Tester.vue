@@ -52,6 +52,7 @@
           label(for='field_{{ param.name }}') {{ param.name }}
           input(type='{{param.type | to_field}}',
                 id='field_{{ param.name }}',
+                @keypress.enter.prevent="Send()",
                 v-model='param.value',
                 :value='param.default')
           .help_text {{param.help_text}}
