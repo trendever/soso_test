@@ -113,6 +113,10 @@ export const CONFIG = {
                     "name": "from_lead_id",
                     "type": "number",
                     "help_text": "ID лида от которого нужно начать выборку (не вклюачя этот ID), работает только если явно задан лимит"
+                },{
+                    "name": "roles",
+                    "type": "string",
+                    "help_text": "Список ролей через запятую, возможные роли: seller, customer, supplier. Если ни одна из ролей не передана, будет возвращено две группы лидов: customer(только лиды где юзер customer) и seller(где юзер seller, supplier или super_seller)"
                 }]
             }, {
                 "name": "retrieve",
