@@ -110,10 +110,15 @@ export const CONFIG = {
                     "type": "number",
                     "help_text": "Сколько лидов за раз вернуть, по умолчанию 20"
                 }, {
-                    "name": "from_lead_id",
+                    "name": "from_updated_at",
                     "type": "number",
-                    "help_text": "ID лида от которого нужно начать выборку (не вклюачя этот ID), работает только если явно задан лимит"
+                    "help_text": "Время обновления от которого нужно возвращать лиды. Используйте 0 чтобы получить самые свежии лиды, а затем используйте update_at последнего в списке для получения следующей страницы"
                 },{
+                    "name": "direction",
+                    "type": "boolean",
+                    "help_text": "Направление сортировки true - asc, false - desc"
+                },
+                    {
                     "name": "roles",
                     "type": "string",
                     "help_text": "Список ролей через запятую, возможные роли: seller, customer, supplier. Если ни одна из ролей не передана, будет возвращено две группы лидов: customer(только лиды где юзер customer) и seller(где юзер seller, supplier или super_seller)"
@@ -253,7 +258,13 @@ export const CONFIG = {
                         "name": "limit",
                         "type": "number",
                         "required": false
-                    }]
+                    },
+                        {
+                            "name": "direction",
+                            "type": "boolean",
+                            "default": false,
+                            "required": false
+                        }]
                 }]
 
         },
