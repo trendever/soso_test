@@ -228,7 +228,7 @@ export const CONFIG = {
                 }, {
                     "name": "mime_type",
                     "type": "string",
-                    "help_text": "по умолчанию text/plain"
+                    "help_text": "по умолчанию text/plain. Для того чтобы послать изображение, нужно указать тип image/base64, в качестве текста передать base64 закодированное сообщение. Обратите внимание что FileReader.GetDataUrl возвращает не чистый base64, а с префиксом, который нужно удалить из полученной строки"
                 }]
             }, {
                 "name": "update",
