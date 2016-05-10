@@ -265,6 +265,10 @@ export const CONFIG = {
                             "default": false,
                             "required": false
                         }]
+                }, {
+                    "name": "count_unread",
+                    description: "Получить общее число не прочтенных сообщений для всех чатов",
+                    "params": []
                 }]
 
         },
