@@ -11,7 +11,7 @@
       div Main Settings
       br
       select(v-model='socket_url', v-on:change='sock.close()')
-        option(value='http://dev.trendever.com:80/channel', selected='') dev
+        option(value='https://dev.trendever.com/channel', selected='') dev
         option(value='http://trendever.com:80/channel') live
         option(value='localhost:8081/channel') localhost:8081
       .status(@click='InitSock()', :class="{'__online': connected}")
