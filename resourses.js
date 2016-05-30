@@ -42,9 +42,9 @@ export const CONFIG = {
                 type: "number",
                 help_text: "ID пользователя. Вернет продукты которые упоминал пользватель, или которые лайкнул"
             }, {
-                name: "user_instagram_name",
+                name: "instagram_name",
                 type: "string",
-                help_text: "Instagram username пользователя. Вернет продукты которые упоминал пользватель, или которые лайкнул"
+                help_text: "Instagram username пользователя или магазина. Вернет продукты которые упоминал пользватель, или которые лайкнул. Если это магазин, то вернет продукты магазина. При поиски по instagram_name приоритет отдается магазину. Т.е. при существовании магазина и пользователя с одинаковым юзернеймом, поиск будет по магазину"
             }, {
                 name: "shop_id",
                 type: "number",
@@ -321,12 +321,12 @@ export const CONFIG = {
             "actions": [
                 {
                     "name": "retrieve",
-                    "description": "Получения профиля пользователя",
+                    "description": "Получения профиля пользователя или магазина",
                     "params": [
                         {
                             "name": "instagram_name",
                             "type": "string",
-                            "help_text": "Instagram username пользователя"
+                            "help_text": "Instagram username пользователя или магазина. Приритет отдается магазину, т.е. при совпадении инстаграм имен, будет возвращен магазин"
                         },
                         {
                             "name": "user_id",
@@ -336,30 +336,9 @@ export const CONFIG = {
                     ]
                 }
             ]
-        },
-
-        {
-            "name": "shop",
-            "description": "Профиль магазина",
-            "actions": [
-                {
-                    "name": "retrieve",
-                    "description": "Получения профиля магазина",
-                    "params": [
-                        {
-                            "name": "instagram_name",
-                            "type": "string",
-                            "help_text": "Instagram username магазина"
-                        },
-                        {
-                            "name": "shop_id",
-                            "type": "number",
-                            "help_text": "ID магазина в core"
-                        }
-                    ]
-                }
-            ]
         }
+
+
 
     ]
 };
