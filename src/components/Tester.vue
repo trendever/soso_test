@@ -10,10 +10,11 @@
     .tab_content(v-show="settings_tab=='main'")
       div Main Settings
       br
-      select(v-model='socket_url', v-on:change='sock.close()')
+      select(v-model='socket_url', v-on:change='soso.sock.close()')
         option(value='https://dev.trendever.com/channel', selected='') dev
-        option(value='http://trendever.com:80/channel') live
-        option(value='localhost:8081/channel') localhost:8081
+        option(value='http://www.trendever.com/channel') live
+        option(value='http://localhost:8081/channel') localhost:8081
+
       .status(@click='InitSock()', :class="{'__online': connected}")
         span(v-if='connected') online
         span(v-if='!connected') connect
@@ -85,10 +86,10 @@
 </template>
 
 <script>
-
 import Vue from 'vue';
-import * as profile from 'src/services/profile';
-import {CONFIG} from '../../resourses.js';
+import store from 'store'
+import SoSo from 'src/services/soso'
+import { CONFIG } from '../../resourses.js';
 
 Vue.filter('to_field', function (value) {
   var parts = value.split('|');
@@ -141,10 +142,10 @@ export default {
       return actions;
     }
   },
-  ready: function() {
+  ready() {
     this.InitSock();
     this.InitApiSettings();
-    this.auth_token = profile.getProfile().token;
+    this.auth_token = store.get('auth_token');
     this.reponse_editor = new JSONEditor(
         document.getElementById('reponse_editor'),
         this.editor_settings
@@ -152,28 +153,26 @@ export default {
   },
   methods: {
     InitSock: function(){
-      this.sock = SockJS(this.socket_url);
-      this.sock.onmessage = this.receive;
-      this.sock.onopen = this.open;
-      this.sock.onclose = this.close;
+      this.soso = new SoSo(this.socket_url);
+      this.soso.ondirectmsg = this.receiveDirectMsg;
+      this.soso.onopen = this.open;
+      this.soso.onclose = this.close;
     },
+
     open: function() {
       this.connected = true;
       this.error = null;
     },
+
     close: function(err){
       this.connected = false;
       this.error = err.reason;
     },
-    receive: function(resp) {
-      var response = JSON.parse(resp.data);
-      this.log("response", response);
-      this.reponse_editor.set(response);
-      this.error = null;
+
+    receiveDirectMsg: function(data) {
+      this.log("direct", data);
     },
-    send: function(request_obj) {
-      this.sock.send(JSON.stringify(request_obj));
-    },
+
     Send: function(){
       var request_map = {},
           trans_map = {},
@@ -192,16 +191,20 @@ export default {
         }
         request_map[param.name] = this.convertType(param.value, param.type);
       }
-      var data = {
-        action_str: this.action.name,
-        data_type: this.resourse.name,
-        log_list:[],
-        request_map: request_map,
-        trans_map:trans_map
-      };
-      this.log("request", data);
-      this.send(data);
+
+      this.log("request", {'action_str': this.action.name,
+                           'data_type': this.resourse.name});
+      this.soso.request(this.action.name,
+                        this.resourse.name,
+                        request_map,
+                        trans_map)
+      .then( data => {
+        this.log("response", data);
+        this.reponse_editor.set(data);
+        this.error = null;
+      });
     },
+
     InitApiSettings: function() {
       var self = this;
       // Init editor and watch changes
@@ -247,7 +250,7 @@ export default {
       var id = "log_" + new Date().getTime();
 
       if (!data.log_list) {
-        data.log_list = [{}];
+        data.log_list = [];
       }
       var description =
       " <span style='color: #2196F3'>" +
@@ -295,7 +298,7 @@ export default {
   watch: {
     auth_token: function() {
       // if (this.auth_token && this.auth_token.length > 0) {
-        profile.setToken(this.auth_token);
+        store.set('auth_token', this.auth_token)
       // }
     }
   }
