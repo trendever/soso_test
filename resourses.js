@@ -90,6 +90,43 @@ export const CONFIG = {
                 }]
             }]
         },
+        {
+            name: "card",
+            actions: [{
+                name: "retrieve",
+                description: "Получить карты магазина",
+                params: [{
+                    name: "shop_id",
+                    type: "number",
+                    default: 0
+                }]
+            },
+            {
+                name: "create",
+                description: "Создать карту магазина",
+                params: [{ 
+                    name: "shop_id",
+                    type: "number",
+                    default: 0
+                }, { 
+                    name: "card_name",
+                    type: "string",
+                    default: ""
+                }, { 
+                    name: "card_number",
+                    type: "string",
+                    default: ""
+                }]
+            }, {
+                name: "delete",
+                description: "Удалить карту по ID",
+                params: [{ 
+                    name: "card_id",
+                    type: "number",
+                    default: 0
+                }]
+            }]
+        },
 
         {
             name: "lead",
