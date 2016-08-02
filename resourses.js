@@ -67,6 +67,10 @@ export const CONFIG = {
                 type: "number|array",
                 help_text: "Например: [1, 2 ,3]"
             }]
+        }, {
+            name: "get_specials",
+            description: "Возвращает список товаров с нестандартными шаблонами",
+            params: []
         }]
     },
 
@@ -132,12 +136,16 @@ export const CONFIG = {
             name: "lead",
             actions: [{
                 "name": "create",
-                description: "Вложить описание",
+                description: "Создает или находит существующий заказ и выподлняет действие, заднанное в action, с переданным товром в контексте этого заказа.",
                 "params": [{
                     "name": "id",
                     "type": "number",
                     "help_text": "ID продукта. Например: 42",
                     "required": true
+                }, {
+                    "name": "action",
+                    "type": "number",
+                    "help_text": "Код типа действия. 0(по умолчанию) - покупка, 1 - запрос информации в чат"
                 }]
             }, {
                 "name": "list",
@@ -300,7 +308,8 @@ export const CONFIG = {
                             "name": "direction",
                             "type": "boolean",
                             "default": false,
-                            "required": false
+                            "required": false,
+                            "help_text": "если true, сообщения возращаются от новых к старым"
                         }]
                 }, {
                     "name": "count_unread",
