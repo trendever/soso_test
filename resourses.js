@@ -94,6 +94,8 @@ export const CONFIG = {
                 }]
             }]
         },
+
+
         {
             name: "card",
             actions: [{
@@ -131,6 +133,60 @@ export const CONFIG = {
                 }]
             }]
         },
+
+
+        {
+            name: "order",
+            actions: [{
+                name: "create",
+                description: "Создать ордер на перевод между картами",
+                params: [
+			{
+			    name: "amount",
+			    type: "number",
+			    help_text: "Сумма платежа в валюте",
+			    default: 0
+			}, {
+			    name: "currency",
+			    type: "number",
+			    help_text: "Номер валюты (соответственно protobuf; 0=RUB)",
+			    default: 0
+			}, {
+			    name: "lead_id",
+			    type: "number",
+			    help_text: "Номер заказа, по которому проходит оплата",
+			    default: 0
+			}, {
+			    name: "card",
+			    type: "string",
+			    help_text: "Номер карты магазина",
+			    default: ""
+			}
+		]
+            }]
+        },
+
+        {
+            name: "payment",
+            actions: [{
+                name: "create",
+                description: "Начать процесс оплаты (получить ссылку на страницу с оплатой)",
+                params: [
+			{
+			    name: "id",
+			    type: "number",
+			    help_text: "ID ордера на оплату",
+			    default: 0
+			}, {
+			    name: "lead_id",
+			    type: "number",
+			    help_text: "Номер заказа, по которому проходит оплата",
+			    default: 0
+			}
+		]
+            }]
+        },
+
 
         {
             name: "lead",
