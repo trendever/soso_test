@@ -418,22 +418,32 @@ export const CONFIG = {
         },
 
         {
-            "name": "user",
-            "description": "Профиль пользователя",
-            "actions": [
+            name: "user",
+            description: "Профиль пользователя",
+            actions: [
                 {
-                    "name": "retrieve",
-                    "description": "Получения профиля пользователя или магазина",
-                    "params": [
+                    name: "retrieve",
+                    description: "Получения профиля пользователя или магазина",
+                    params: [
                         {
-                            "name": "instagram_name",
-                            "type": "string",
-                            "help_text": "Instagram username пользователя или магазина. Приритет отдается магазину, т.е. при совпадении инстаграм имен, будет возвращен магазин"
+                            name: "instagram_name",
+                            type: "string",
+                            help_text: "Instagram username пользователя или магазина. Приритет отдается магазину, т.е. при совпадении инстаграм имен, будет возвращен магазин"
                         },
                         {
-                            "name": "user_id",
-                            "type": "number",
-                            "help_text": "ID пользователя в core"
+                            name: "user_id",
+                            type: "number",
+                            help_text: "ID пользователя в core"
+                        }
+                    ]
+                },
+                {
+                    name: "set_email",
+                    description: "Устанавливает email для текущего пользователя",
+                    params: [
+                        {
+                            name: "email",
+                            type: "string"
                         }
                     ]
                 }
