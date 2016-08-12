@@ -12,7 +12,7 @@
       br
       select(v-model='socket_url', v-on:change='soso.sock.close()')
         option(value='https://dev.trendever.com/channel', selected='') dev
-        option(value='http://www.trendever.com/channel') live
+        option(value='https://www.trendever.com/channel') live
         option(value='http://localhost:8081/channel') localhost:8081
 
       .status(@click='InitSock()', :class="{'__online': connected}")
