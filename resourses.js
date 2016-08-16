@@ -490,7 +490,28 @@ export const CONFIG = {
                 }
             ]
         },
-
+        {
+            name: "shop",
+            description: "Профиль магазина",
+            actions: [
+            {
+                name: "retrieve",
+                description: "Получения профиля магазина по id или имени в инстаграмме",
+                params: [
+                {
+                    name: "instagram_name",
+                    type: "string",
+                    help_text: "Instagram username пользователя"
+                },
+                {
+                    name: "shop_id",
+                    type: "number",
+                    help_text: "ID пользователя в core"
+                }
+                ]
+            }
+            ]
+        }
 
 
     ]
