@@ -22,18 +22,23 @@ function SoSo(url) {
       resp.log_map = resp.log_list[0]
     }
 
-    if (resp.trans_map.trans_id) {
-      self.callbacks[resp.trans_map.trans_id](resp)
-      delete self.callbacks[resp.trans_map.trans_id]
-    } else {
-      if (this.ondirectmsg) {
-        self.ondirectmsg(resp)
+    console.log(resp);
+    if (resp.trans_map){
+      if (resp.trans_map.trans_id) {
+        self.callbacks[resp.trans_map.trans_id](resp)
+        delete self.callbacks[resp.trans_map.trans_id]
+      } else {
+        if (this.ondirectmsg) {
+          self.ondirectmsg(resp)
+        }
       }
     }
+    
+    var sended_at = (resp.trans_map) ? resp.trans_map.sended_at : new Date().getTime();
 
-    if (self.log && resp.trans_map.sended_at) {
+    if (self.log && sended_at) {
 
-      var sendedAt = resp.trans_map.sended_at;
+      var sendedAt = sended_at;
       var endTime = new Date().getTime();
 
       var code_int = parseInt(resp.log_map.code_key);
