@@ -159,7 +159,7 @@ export const CONFIG = {
 			}, {
 			    name: "card",
 			    type: "string",
-			    help_text: "Номер карты магазина",
+			    help_text: "ID карты магазина",
 			    default: ""
 			}
 		]
