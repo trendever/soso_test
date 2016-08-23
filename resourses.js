@@ -68,6 +68,36 @@ export const CONFIG = {
                 help_text: "Например: [1, 2 ,3]"
             }]
         }, {
+            name: "elastic_search",
+            description: "поиск продуктов через эластик",
+            params: [{
+                name: "query",
+                type: "string",
+                help_text: "текст запроса"
+            }, {
+                name: "tags",
+                type: "number|array",
+                help_text: "Массив id интересующих тегов('[1, 2 ,3]')"
+            }, {
+                name: "shop_id",
+                type: "number",
+                help_text: "id магазина, в товарах которого идет поиск"
+            }, {
+                name: "mentioner_id",
+                type: "number",
+                help_text: "id пользователя, добавившего товар"
+            }, {
+                name: "limit",
+                type: "number",
+                default: 9,
+                help_text: "количество запрашиваемых результатов"
+            }, {
+                name: "offset",
+                type: "number",
+                default: 0,
+                help_text: "смещение начала окна возвращаемых результатов"
+            }]
+        }, {
             name: "get_specials",
             description: "Возвращает список товаров с нестандартными шаблонами",
             params: []
