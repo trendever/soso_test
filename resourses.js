@@ -265,18 +265,30 @@ export const CONFIG = {
                     "type": "number"
                 }]
             }, {
-                "name": "event",
-                description: "Вложить описание",
-                "params": [{
-                    "name": "lead_id",
-                    "type": "number",
-                    "required": true
+                name: "event",
+                description: "Изменяет статус заказа",
+                params: [{
+                    name: "lead_id",
+                    type: "number",
+                    required: true
                 }, {
-                    "name": "event",
-                    "type": "string",
-                    "help_text": "Доступные события: CREATE, PROGRESS, SUBMIT, DELIVERY, COMPLETE, CANCEL",
-                    "required": true
+                    name: "event",
+                    type: "string",
+                    help_text: "Доступные события: CREATE, PROGRESS, SUBMIT, DELIVERY, COMPLETE, CANCEL",
+                    required: true
+                }, {
+                    name: "cancel_reason",
+                    type: "number",
+                    help_text: "id причины отмены заказа. Если 0, текущее значение не изменяется"
+                }, {
+                    name: "status_commet",
+                    type: "string",
+                    help_text: "Комментарий к статусу заказа. Если пустой, старое значение не изменяется"
                 }]
+            }, {
+                name: "get_cancel_reasons",
+                description: "Возвращает возможные причины отмены заказа",
+                params: []
             }]
         },
 
@@ -346,61 +358,61 @@ export const CONFIG = {
             name: "message",
             description: "Сообщения чата",
             actions: [{
-                "name": "create",
+                name: "create",
                 description: "Отправка сообщения участинам чата",
-                "params": [{
-                    "name": "conversation_id",
-                    "type": "number",
-                    "required": true
+                params: [{
+                    name: "conversation_id",
+                    type: "number",
+                    required: true
                 }, {
-                    "name": "text",
-                    "type": "string",
-                    "required": true
+                    name: "text",
+                    type: "string",
+                    required: true
                 }, {
-                    "name": "mime_type",
-                    "type": "string",
-                    "help_text": "по умолчанию text/plain. Для того чтобы послать изображение, нужно указать тип image/base64, в качестве текста передать base64 закодированное сообщение. Обратите внимание что FileReader.GetDataUrl возвращает не чистый base64, а с префиксом, который нужно удалить из полученной строки"
+                    name: "mime_type",
+                    type: "string",
+                    help_text: "по умолчанию text/plain. Для того чтобы послать изображение, нужно указать тип image/base64, в качестве текста передать base64 закодированное сообщение. Обратите внимание что FileReader.GetDataUrl возвращает не чистый base64, а с префиксом, который нужно удалить из полученной строки"
                 }]
             }, {
-                "name": "update",
+                name: "update",
                 description: "Пометить сообщение прочтенным",
-                "params": [{
-                    "name": "conversation_id",
-                    "type": "number",
-                    "required": true
+                params: [{
+                    name: "conversation_id",
+                    type: "number",
+                    required: true
                 }, {
-                    "name": "message_id",
-                    "type": "number",
-                    "required": true
+                    name: "message_id",
+                    type: "number",
+                    required: true
                 }]
             },
                 {
-                    "name": "search",
+                    name: "search",
                     description: "История сообщений",
-                    "params": [{
-                        "name": "conversation_id",
-                        "type": "number",
-                        "required": true
+                    params: [{
+                        name: "conversation_id",
+                        type: "number",
+                        required: true
                     }, {
-                        "name": "from_message_id",
-                        "type": "number",
-                        "required": false
+                        name: "from_message_id",
+                        type: "number",
+                        required: false
                     }, {
-                        "name": "limit",
-                        "type": "number",
-                        "required": false
+                        name: "limit",
+                        type: "number",
+                        required: false
                     },
                         {
-                            "name": "direction",
-                            "type": "boolean",
-                            "default": false,
-                            "required": false,
-                            "help_text": "если true, сообщения возращаются от новых к старым"
+                            name: "direction",
+                            type: "boolean",
+                            default: false,
+                            required: false,
+                            help_text: "если true, сообщения возращаются от новых к старым"
                         }]
                 }, {
-                    "name": "count_unread",
+                    name: "count_unread",
                     description: "Получить общее число не прочтенных сообщений для всех чатов",
-                    "params": []
+                    params: []
                 }]
 
         },
