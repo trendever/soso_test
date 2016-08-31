@@ -98,6 +98,15 @@ export const CONFIG = {
                 help_text: "смещение начала окна возвращаемых результатов"
             }]
         }, {
+            name: "get_liked_by",
+            description: "Возвращает список товаров, лайкнутых пользователем",
+            params: [{
+                name: "user_id",
+                type: "number",
+                required: true,
+                help_text: "id интересующего пользователя"
+            }]
+        }, {
             name: "get_specials",
             description: "Возвращает список товаров с нестандартными шаблонами",
             params: []
