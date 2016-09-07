@@ -174,12 +174,12 @@ export const CONFIG = {
         },
 
 
-        {
-            name: "order",
-            actions: [{
-                name: "create",
-                description: "Создать ордер на перевод между картами",
-                params: [
+      {
+        name: "order",
+        actions: [{
+          name: "create",
+          description: "Создать ордер на перевод между картами",
+          params: [
 			{
 			    name: "amount",
 			    type: "number",
@@ -202,7 +202,25 @@ export const CONFIG = {
 			    default: ""
 			}
 		]
-            }]
+            }, {
+          name: "cancel",
+          description: "Отменить ордер на перевод",
+          params: [
+			{
+			    name: "lead_id",
+			    type: "number",
+			    help_text: "Номер заказа, по которому проходит оплата",
+			    default: 0
+			}, {
+			    name: "pay_id",
+			    type: "number",
+			    help_text: "Номер отменяемого ордера",
+			    default: 0
+			}
+		]
+
+            }
+        ]
         },
 
         {
@@ -340,10 +358,6 @@ export const CONFIG = {
                         "help_text": "ID чата"
                     }
                 ]
-            }, {
-                "name": "list",
-                description: "Вложить описание",
-                "params": []
             }, {
                 "name": "call_supplier",
                 description: "Позвать поставщика",
