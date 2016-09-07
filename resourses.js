@@ -212,7 +212,7 @@ export const CONFIG = {
 			    help_text: "Номер заказа, по которому проходит оплата",
 			    default: 0
 			}, {
-			    name: "pay_id",
+			    name: "id",
 			    type: "number",
 			    help_text: "Номер отменяемого ордера",
 			    default: 0
