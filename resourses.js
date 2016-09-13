@@ -576,8 +576,22 @@ export const CONFIG = {
                 ]
             }
             ]
+        },
+        {
+            name: "common",
+            description: "Другое",
+            actions: [
+            {
+                name: "market_sms",
+                description: "Посылает смс со ссылкой на маркет на переданный номер",
+                params: [{
+                    name: "phone",
+                    type: "string",
+                    required: true
+                }]
+            }
+            ]
         }
-
 
     ]
 };
