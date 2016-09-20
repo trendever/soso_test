@@ -306,7 +306,7 @@ export const CONFIG = {
                 }, {
                     name: "cancel_reason",
                     type: "number",
-                    help_text: "id причины отмены заказа. Если 0, текущее значение не изменяется"
+                    help_text: "id причины отмены заказа. Обязателен при event = CANCEL, при переходах в другие состояния сбрасывается"
                 }, {
                     name: "status_commet",
                     type: "string",
