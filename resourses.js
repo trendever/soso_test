@@ -85,7 +85,7 @@ export const CONFIG = {
             }, {
                 name: "mentioner_id",
                 type: "number",
-                help_text: "id пользователя, добавившего товар"
+                help_text: "id пользователя, добавившего товар. исключит из выдачи товары, для которых этот пользователь является поставщиком"
             }, {
                 name: "limit",
                 type: "number",
@@ -96,6 +96,9 @@ export const CONFIG = {
                 type: "number",
                 default: 0,
                 help_text: "смещение начала окна возвращаемых результатов"
+            }, {
+                name: "include_not_on_sale",
+                type: "boolean",
             }]
         }, {
             name: "get_liked_by",
