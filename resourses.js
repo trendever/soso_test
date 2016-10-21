@@ -581,6 +581,45 @@ export const CONFIG = {
             ]
         },
         {
+            name: "coins",
+            description: "Трендкоины",
+            actions: [
+            {
+                name: "balance",
+                description: "Возвращает баланс текущего пользователя",
+                params: []
+            },
+            {
+                name: "log",
+                description: "Возвращает лог транзакций текущего пользователя",
+                params: [{
+                    name: "limit",
+                    type: "number",
+                    default: 20,
+                        help_text: "количество запрашиваемых результатов"
+                }, {
+                    name: "offset",
+                    type: "number",
+                    default: 0,
+                        help_text: "смещение начала окна возвращаемых результатов"
+                }, {
+                    name: "before",
+                    type: "number",
+                        help_text: "только транзакции, произведенные до(не включая), юникстайм, секунды"
+                }, {
+                    name: "after",
+                    type: "number",
+                        help_text: "только транзакции, произведенные начиная с(включительно), юникстайм, секунды"
+                }, {
+                    name: "asc",
+                    type: "boolean",
+                    dafault: false,
+                    help_text: "если истина, транзакции возвращаются от старых к новым(по умолчанию наооборот)"
+                }]
+            }
+            ]
+        },
+        {
             name: "common",
             description: "Другое",
             actions: [
