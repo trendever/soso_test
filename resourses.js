@@ -620,6 +620,25 @@ export const CONFIG = {
             ]
         },
         {
+            name: "monetization",
+            description: "Инфрмация о планах монитизации",
+            actions: [
+            {
+                name: "get_plan",
+                description: "Возвращает информацию о конкретном плане",
+                params: [{
+                    name: "plan_id",
+                    type: "number",
+                    help_text: "ID плана"
+                }]
+            },  {
+                name: "plans_list",
+                description: "Возвращает список публичных плане",
+                params: []
+            }
+            ]
+        },
+        {
             name: "common",
             description: "Другое",
             actions: [
