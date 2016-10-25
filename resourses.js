@@ -629,14 +629,26 @@ export const CONFIG = {
                 params: [{
                     name: "plan_id",
                     type: "number",
+                    required: true,
                     help_text: "ID плана"
                 }]
-            },  {
+            }, {
                 name: "plans_list",
                 description: "Возвращает список публичных плане",
-                params: []
-            }
-            ]
+                params: [{
+                    name: "currency",
+                    type: "string",
+                    help_text: "опциональный фильтр по валюте(RUB/USD/etc)",
+                }]
+            }, {
+                name: "coins_offers",
+                description: "Возвращает список пакетов коинов",
+                params: [{
+                    name: "currency",
+                    type: "string",
+                    help_text: "опциональный фильтр по валюте(RUB/USD/etc)",
+                }]
+            }]
         },
         {
             name: "common",
