@@ -648,7 +648,26 @@ export const CONFIG = {
                     type: "string",
                     help_text: "опциональный фильтр по валюте(RUB/USD/etc)",
                 }]
-            }]
+            }, {
+                name: "subscribe",
+                description: "Подключает магазин к плану монетизации. Текущий пользователь должен быть поставщиком этого магазина",
+                params: [{
+                    name: "plan_id",
+                    type: "number",
+                    required: true,
+                    help_text: "ID плана"
+                }, {
+                    name: "shop_id",
+                    type: "number",
+                    required: true,
+                    help_text: "ID шопа"
+                }, {
+                    name: "auto_renewal",
+                    type: "boolean",
+                    help_text: "если истина, подписка будет автоматически продляться по истечению"
+                }]
+            }
+            ]
         },
         {
             name: "common",
