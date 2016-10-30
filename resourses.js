@@ -462,8 +462,12 @@ export const CONFIG = {
                     help_text: "Если пользователь не имеет instagram то, шлем его"
                 }]
             }, {
+                name: "fakeregister",
+                description: "Регистрирует временного пользователя и возвращает токен",
+                params: []
+            }, {
                 name: "send_password",
-                description: "Вложить описание",
+                description: "Отправляет пароль на телефон",
                 params: [{
                     name: "phone",
                     type: "string",
@@ -471,7 +475,7 @@ export const CONFIG = {
                 }]
             }, {
                 name: "login",
-                description: "Вложить описание",
+                description: "Логинит и возвращает токен",
                 params: [{
                     name: "phone",
                     type: "string",
@@ -511,6 +515,20 @@ export const CONFIG = {
                     params: [
                         {
                             name: "email",
+                            type: "string"
+                        }
+                    ]
+                },
+                {
+                    name: "set_data",
+                    description: "Устанавливает name и phone для текущего пользователя",
+                    params: [
+                        {
+                            name: "name",
+                            type: "string"
+                        },
+                        {
+                            name: "phone",
                             type: "string"
                         }
                     ]
