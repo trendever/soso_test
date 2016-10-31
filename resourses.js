@@ -665,6 +665,24 @@ export const CONFIG = {
                     name: "currency",
                     type: "string",
                     help_text: "опциональный фильтр по валюте(RUB/USD/etc)",
+                }, {
+                    name: "offer_id",
+                    type: "number",
+                    help_text: "может быть передан для выбора получения конкретного пакета по id",
+                }]
+            }, {
+                name: "buy_coins",
+                description: "Покупка коинв. Возвращает id платежа, дальше его нужно использовать в payment/create",
+                params: [{
+                    name: "offer_id",
+                    type: "number",
+                    required: true,
+                    help_text: "ID пакета",
+                }, {
+                    name: "gateway",
+                    type: "string",
+                    required: true,
+                    help_text: "имя гайта платежей",
                 }]
             }, {
                 name: "subscribe",
