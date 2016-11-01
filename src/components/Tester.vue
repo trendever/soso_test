@@ -143,7 +143,7 @@ export default {
   },
   computed: {
     actions: function(){
-      if (this.resource){
+      if (this.resourse){
         var actions = this.resourse.actions;
         this.action = actions[0];
         return actions;
