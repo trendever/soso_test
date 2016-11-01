@@ -183,7 +183,7 @@ export default {
     },
 
     Send: function(){
-      if (action == null){
+      if (this.action == null){
         return
       }
       var request_map = {},
