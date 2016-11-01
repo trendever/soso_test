@@ -10,10 +10,9 @@
     .tab_content(v-show="settings_tab=='main'")
       div Main Settings
       br
-      select(v-model='socket_url', v-on:change='soso.sock.close()')
-        option(value='https://dev.trendever.com/channel', selected='') dev
-        option(value='https://www.trendever.com/channel') live
-        option(value='http://localhost:8081/channel') localhost:8081
+      select(v-model='selected_id', v-on:change='soso.sock.close()')
+        option(v-for="socket in sockets" 
+          v-bind:value="socket.id") {{socket.name}}
 
       .status(@click='InitSock()', :class="{'__online': connected}")
         span(v-if='connected') online
@@ -47,7 +46,7 @@
         i.material-icons settings
 
     .params
-      .param_list(v-if="action.params.length")
+      .param_list(v-if="action && action.params.length")
         .input(v-bind:class="{'__required': param.required}",
                v-for='param in action.params')
           label(for='field_{{ param.name }}') {{ param.name }}
@@ -62,12 +61,12 @@
         .toggle(@click="isVisibleDescription=!isVisibleDescription")
           span(v-if="!isVisibleDescription") Show description
           span(v-if="isVisibleDescription") Hide description
-        .cnt(v-if="isVisibleDescription")
+        .cnt(v-if="isVisibleDescription && action")
           | {{{ action.description }}}
 
     .response
       .title Last Response
-      .error(v-if='error.length')
+      .error(v-if='error && error.length')
         | Error: {{ error }}
       #reponse_editor(style='height: 500px')
 
@@ -108,14 +107,20 @@ Vue.filter('to_field', function (value) {
   console.log("Unsupported param type", type, "of", value);
 });
 
-export default {
+export default {  
   data () {
+    let sockets_params = [
+      {id: 0, url: 'https://dev.trendever.com/channel', name: 'dev'},
+      {id: 1, url: 'https://www.trendever.com/channel', name: 'live'},
+      {id: 2, url: 'http://localhost:8081/channel', name: 'localhost'}
+    ];
     return {
       config: CONFIG,
       resourses: null,
       resourse: null,
       action: null,
-      socket_url:null,
+      socket_url: sockets_params[0],
+      sockets: sockets_params,
       sock: null,
       error: "",
       request: "",
@@ -132,20 +137,24 @@ export default {
       settings_tab: "main",
       settings_show: false,
       frame_width: "700px",
-      auth_token: null
+      auth_token: null,
+      selected_id: 0
     }
   },
   computed: {
     actions: function(){
-      var actions = this.resourse.actions;
-      this.action = actions[0];
-      return actions;
+      if (this.resource){
+        var actions = this.resourse.actions;
+        this.action = actions[0];
+        return actions;
+      }
     }
   },
   ready() {
     this.InitSock();
     this.InitApiSettings();
-    this.auth_token = store.get('auth_token');
+    let name = this.socket_url.name;
+    this.auth_token = store.get('auth_token_' + name);
     this.reponse_editor = new JSONEditor(
         document.getElementById('reponse_editor'),
         this.editor_settings
@@ -153,7 +162,7 @@ export default {
   },
   methods: {
     InitSock: function(){
-      this.soso = new SoSo(this.socket_url);
+      this.soso = new SoSo(this.socket_url.url);
       this.soso.ondirectmsg = this.receiveDirectMsg;
       this.soso.onopen = this.open;
       this.soso.onclose = this.close;
@@ -174,6 +183,9 @@ export default {
     },
 
     Send: function(){
+      if (action == null){
+        return
+      }
       var request_map = {},
           trans_map = {},
           params = this.action.params;
@@ -297,9 +309,17 @@ export default {
 
   watch: {
     auth_token: function() {
-      // if (this.auth_token && this.auth_token.length > 0) {
-        store.set('auth_token', this.auth_token)
-      // }
+      console.log("TOKEN")
+      console.log(this.socket_url.name)
+      console.log(this.auth_token)
+      store.set('auth_token_' + this.socket_url.name, this.auth_token);
+    },
+    selected_id: function(){
+      this.socket_url = this.sockets[this.selected_id]
+      console.log("SOCKET")
+      console.log(this.socket_url)
+      console.log(this.auth_token)
+      this.auth_token = store.get('auth_token_' + this.socket_url.name);
     }
   }
 
