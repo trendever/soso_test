@@ -741,6 +741,25 @@ export const CONFIG = {
                 }]
             }
             ]
+        },
+        {
+            name: "instagram",
+            description: "",
+            actions: [
+            {
+                name: "get_profile",
+                description: "Получает профиль в инстаргамме по его id или имени",
+                params: [{
+                    name: "id",
+                    type: "number",
+                    help_text: "instagram id"
+                }, {
+                    name: "name",
+                    type: "string",
+                    help_text: "instagram username"
+                }]
+            }
+            ]
         }
 
     ]
