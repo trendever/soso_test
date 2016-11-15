@@ -176,6 +176,28 @@ export const CONFIG = {
             }]
         },
 
+        {
+            name: "paymentcard",
+            actions: [{
+                name: "retrieve",
+                description: "Получить карты текущего юзера",
+                params: []
+            },
+            {
+                name: "create",
+                description: "Создать карту",
+                params: []
+            }, {
+                name: "delete",
+                description: "Удалить карту по ID",
+                params: [{
+                    name: "card_id",
+                    type: "string",
+                    default: ""
+                }]
+            }]
+        },
+
 
       {
         name: "order",
