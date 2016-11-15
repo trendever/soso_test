@@ -707,6 +707,15 @@ export const CONFIG = {
                     help_text: "имя гайта платежей",
                 }]
             }, {
+                name: "set_autorefill",
+                description: "Устанавливает пакет коинов для автопополнения счета",
+                params: [{
+                    name: "offer_id",
+                    type: "number",
+                    required: true,
+                    help_text: "ID пакета",
+                }]
+            }, {
                 name: "subscribe",
                 description: "Подключает магазин к плану монетизации. Текущий пользователь должен быть поставщиком этого магазина",
                 params: [{
