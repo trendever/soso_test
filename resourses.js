@@ -679,6 +679,11 @@ export const CONFIG = {
                     name: "currency",
                     type: "string",
                     help_text: "опциональный фильтр по валюте(RUB/USD/etc)",
+                }, {
+                    name: "with_bot",
+                    type: "boolean",
+                    dafault: false,
+                    help_text: "только планы с directbot"
                 }]
             }, {
                 name: "coins_offers",
