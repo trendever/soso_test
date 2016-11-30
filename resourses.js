@@ -198,6 +198,48 @@ export const CONFIG = {
             }]
         },
 
+        {
+            name: "account",
+            actions: [{
+                name: "retrieve",
+                description: "Получить бота текущего юзера",
+                params: []
+            },
+            {
+                name: "search",
+                description: "Список ботов (только для админов)",
+                params: [{
+                    name: "roles",
+                    type: "number|array",
+                    default: "",
+                    help_text: "Example: [1, 2 ,3]. Return only with these roles"
+                },{
+                    "name": "include_invalids",
+                    "type": "boolean",
+                    "help_text": "Include accounts marked as invalid"
+                }
+                ]
+            },
+            {
+                name: "add",
+                description: "Добавить аккаунт",
+                params: [{
+                    name: "password",
+                    type: "string"
+                }
+                ]
+            },
+            {
+                name: "confirm",
+                description: "Ввести код подтверждения",
+                params: [{
+                    name: "code",
+                    type: "string"
+                }
+                ]
+            }]
+        },
+
 
       {
         name: "order",
