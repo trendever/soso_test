@@ -237,7 +237,36 @@ export const CONFIG = {
                     type: "string"
                 }
                 ]
-            }]
+            },
+            {
+                name: "list",
+                description: "Только для админов. Получение слиска известных аккаунтов",
+                params: [{
+                    name: "role",
+                    type: "string",
+                    description: "Если задана, выдаются только аккаунты с этой ролью"
+                }, {
+                    name: "with_invalids",
+                    type: "boolean",
+                    description: "Если инстина, выдаются в том числе невалидные(незалогиненные) аккаутны"
+                
+                }]
+            },
+            {
+                name: "add_bot",
+                description: "Только для админов. Добавление аккаунта для ботов",
+                params: [{
+                    name: "username",
+                    type: "string",
+                }, {
+                    name: "password",
+                    type: "string",
+                }, {
+                    name: "role",
+                    type: "string",
+                }]
+            }
+            ]
         },
 
 
