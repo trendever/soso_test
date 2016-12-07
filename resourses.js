@@ -200,35 +200,7 @@ export const CONFIG = {
 
         {
             name: "account",
-            actions: [{
-                name: "retrieve",
-                description: "Получить бота текущего юзера",
-                params: []
-            },
-            {
-                name: "search",
-                description: "Список ботов (только для админов)",
-                params: [{
-                    name: "roles",
-                    type: "number|array",
-                    default: "",
-                    help_text: "Example: [1, 2 ,3]. Return only with these roles"
-                },{
-                    "name": "include_invalids",
-                    "type": "boolean",
-                    "help_text": "Include accounts marked as invalid"
-                }
-                ]
-            },
-            {
-                name: "add",
-                description: "Добавить аккаунт",
-                params: [{
-                    name: "password",
-                    type: "string"
-                }
-                ]
-            },
+            actions: [
             {
                 name: "confirm",
                 description: "Ввести код подтверждения",
@@ -240,7 +212,7 @@ export const CONFIG = {
             },
             {
                 name: "list",
-                description: "Только для админов. Получение слиска известных аккаунтов",
+                description: "Получение слиска известных аккаунтов",
                 params: [{
                     name: "role",
                     type: "string",
@@ -249,21 +221,25 @@ export const CONFIG = {
                     name: "with_invalids",
                     type: "boolean",
                     description: "Если инстина, выдаются в том числе невалидные(незалогиненные) аккаутны"
-                
+                }, {
+                    name: "with_non_owned",
+                    type: "boolean",
+                    description: "Если инстина, выдаются в том числе аккаунты, не принадлежащие текущему пользвателю. Нужны админские права"
                 }]
             },
             {
-                name: "add_bot",
-                description: "Только для админов. Добавление аккаунта для ботов",
+                name: "add",
+                description: "Добавление аккаунта для ботов",
                 params: [{
                     name: "username",
-                    type: "string",
+                    type: "string"
                 }, {
                     name: "password",
-                    type: "string",
+                    type: "string"
                 }, {
+                    description: "Роль бота. Только для админов",
                     name: "role",
-                    type: "string",
+                    type: "string"
                 }]
             }
             ]
