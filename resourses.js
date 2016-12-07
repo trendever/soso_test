@@ -240,6 +240,10 @@ export const CONFIG = {
                     description: "Роль бота. Только для админов",
                     name: "role",
                     type: "string"
+                }, {
+                    name: "prefer_email",
+                    type: "boolean",
+                    description: "Если инстина, при отправке кода подтверждения приоритет будет предоставляться email-методу"
                 }]
             }
             ]
