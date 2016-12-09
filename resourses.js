@@ -225,6 +225,10 @@ export const CONFIG = {
                     name: "with_non_owned",
                     type: "boolean",
                     description: "Если инстина, выдаются в том числе аккаунты, не принадлежащие текущему пользвателю. Нужны админские права"
+                }, {
+                    name: "show_private",
+                    type: "boolean",
+                    description: "Показывать системные поля. Нужны админские права"
                 }]
             },
             {
