@@ -116,7 +116,12 @@ export const CONFIG = {
         }, {
             name: "lastid",
             description: "Возвращает ID последнего товара",
-            params: []
+            params: [{
+                name: "shop_id",
+                type: "number",
+                required: true,
+                help_text: "id интересующего шопа"
+            }]
         }]
     },
 
