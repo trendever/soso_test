@@ -113,6 +113,10 @@ export const CONFIG = {
             name: "get_specials",
             description: "Возвращает список товаров с нестандартными шаблонами",
             params: []
+        }, {
+            name: "lastid",
+            description: "Возвращает ID последнего товара",
+            params: []
         }]
     },
 
