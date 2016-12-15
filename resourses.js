@@ -122,6 +122,14 @@ export const CONFIG = {
                 required: true,
                 help_text: "id интересующего шопа"
             }]
+        }, {
+            name: "delete",
+            description: "Удалить продукт по ID",
+            params: [{
+                name: "product_id",
+                type: "number",
+                required: true
+            }]
         }]
     },
 
