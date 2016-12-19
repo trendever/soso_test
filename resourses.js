@@ -221,10 +221,19 @@ export const CONFIG = {
             {
                 name: "confirm",
                 description: "Ввести код подтверждения",
-                params: [{
-                    name: "code",
-                    type: "string"
-                }
+                params: [
+                    {
+                        name: "code",
+                        type: "string"
+                    },
+                    {
+                        name: "instagram_username",
+                        type: "string"
+                    },
+                    {
+                        name: "instagram_id",
+                        type: "number"
+                    }
                 ]
             },
             {
