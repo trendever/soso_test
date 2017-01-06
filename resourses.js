@@ -306,6 +306,10 @@ export const CONFIG = {
 			    type: "number",
 			    help_text: "ID карты магазина",
 			    default: ""
+			}, {
+				name: "redirect",
+				type: "string",
+				help_text: "Ключ выбора шаблона перенаправления клиента после оплаты"
 			}
 		]
             }, {
