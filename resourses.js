@@ -456,37 +456,45 @@ export const CONFIG = {
         },
 
         {
-            "name": "chat",
+            name: "chat",
             description: "Присоединение к чату по ID лида или ID его чата",
-            "actions": [{
-                "name": "join",
-                "params": [
+            actions: [{
+                name: "join",
+                params: [
                     {
-                        "name": "lead_id",
-                        "type": "number",
-                        "help_text": "ID лида"
+                        name: "lead_id",
+                        type: "number",
+                        help_text: "ID лида"
                     },
                     {
-                        "name": "conversation_id",
-                        "type": "number",
-                        "help_text": "ID чата"
+                        name: "conversation_id",
+                        type: "number",
+                        help_text: "ID чата"
                     }
                 ]
             }, {
-                "name": "call_supplier",
+                name: "call_supplier",
                 description: "Позвать поставщика",
-                "params": [{
-                    "name": "lead_id",
-                    "type": "number",
-                    "required": true
+                params: [{
+                    name: "lead_id",
+                    type: "number",
+                    required: true
                 }]
             }, {
-                "name": "call_customer",
+                name: "call_customer",
                 description: "Позвать покупателя",
-                "params": [{
-                    "name": "lead_id",
-                    "type": "number",
-                    "required": true
+                params: [{
+                    name: "lead_id",
+                    type: "number",
+                    required: true
+                }]
+            }, {
+                name: "enable_sync",
+                description: "Активирует синхронизацию с директом",
+                params: [{
+                    name: "conversation_id",
+                    type: "number",
+                    help_text: "ID чата"
                 }]
             }]
         },
