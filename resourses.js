@@ -223,10 +223,6 @@ export const CONFIG = {
                 description: "Ввести код подтверждения",
                 params: [
                     {
-                        name: "password",
-                        type: "string"
-                    },
-                    {
                         name: "code",
                         type: "string"
                     },
