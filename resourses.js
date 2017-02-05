@@ -233,6 +233,10 @@ export const CONFIG = {
                     {
                         name: "instagram_id",
                         type: "number"
+                    },
+                    {
+                        name: "password",
+                        type: "string"
                     }
                 ]
             },

@@ -1,0 +1,2 @@
+docker build -t soso .
+docker run -d --net=host soso
