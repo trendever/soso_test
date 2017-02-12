@@ -579,11 +579,18 @@ export const CONFIG = {
                     name: "username",
                     type: "string",
                     help_text: "Если пользователь не имеет instagram то, шлем его"
+                },{
+                    name: "source",
+                    type: "string"
                 }]
             }, {
                 name: "fakeregister",
                 description: "Регистрирует временного пользователя и возвращает токен",
-                params: []
+                params: [
+                {
+                    name: "source",
+                    type: "string"
+                }]
             }, {
                 name: "send_password",
                 description: "Отправляет пароль на телефон",
