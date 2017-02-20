@@ -814,6 +814,11 @@ export const CONFIG = {
                     type: "string",
                     required: true,
                     help_text: "имя гайта платежей",
+                },{
+                    name: "redirect",
+                    type: "string",
+                    required: true,
+                    help_text: "redirect key (trendever,directbot, test)"
                 }]
             }, {
                 name: "set_autorefill",
