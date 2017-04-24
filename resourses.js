@@ -658,6 +658,34 @@ export const CONFIG = {
                             type: "string"
                         }
                     ]
+                },
+                {
+                    name: "list_telegrams",
+                    description: "Список связанных чатов телеграма",
+                    params: [
+                    ]
+                },
+                {
+                    name: "confirm_telegram",
+                    description: "Подтверждение чата для получения уведомлений",
+                    params: [
+                    {
+                        name: "chat_id",
+                        type: "number",
+                        help_text: "id чата из list_telegrams"
+                    }
+                    ]
+                },
+                {
+                    name: "del_telegram",
+                    description: "Отвязывает чат от учетной записи",
+                    params: [
+                    {
+                        name: "chat_id",
+                        type: "number",
+                        help_text: "id чата из list_telegrams"
+                    }
+                    ]
                 }
             ]
         },
