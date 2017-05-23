@@ -246,19 +246,19 @@ export const CONFIG = {
                 params: [{
                     name: "role",
                     type: "string",
-                    description: "Если задана, выдаются только аккаунты с этой ролью"
+                    help_text: "Если задана, выдаются только аккаунты с этой ролью"
                 }, {
                     name: "with_invalids",
                     type: "boolean",
-                    description: "Если инстина, выдаются в том числе невалидные(незалогиненные) аккаутны"
+                    help_text: "Если инстина, выдаются в том числе невалидные(незалогиненные) аккаутны"
                 }, {
                     name: "with_non_owned",
                     type: "boolean",
-                    description: "Если инстина, выдаются в том числе аккаунты, не принадлежащие текущему пользвателю. Нужны админские права"
+                    help_text: "Если инстина, выдаются в том числе аккаунты, не принадлежащие текущему пользвателю. Нужны админские права"
                 }, {
                     name: "show_private",
                     type: "boolean",
-                    description: "Показывать системные поля. Нужны админские права"
+                    help_text: "Показывать системные поля. Нужны админские права"
                 }]
             },
             {
@@ -271,13 +271,17 @@ export const CONFIG = {
                     name: "password",
                     type: "string"
                 }, {
-                    description: "Роль бота. Только для админов",
                     name: "role",
-                    type: "string"
+                    type: "string",
+                    help_text: "Роль бота. Только для админов"
                 }, {
                     name: "prefer_email",
                     type: "boolean",
-                    description: "Если инстина, при отправке кода подтверждения приоритет будет предоставляться email-методу"
+                    help_text: "Если инстина, при отправке кода подтверждения приоритет будет предоставляться email-методу"
+                }, {
+                    name: "proxy",
+                    type: "string",
+                    help_text: "Прокси в формате schema://user:password@host:port Подддерживаеются http, https и socks5 прокси"
                 }]
             }
             ]
