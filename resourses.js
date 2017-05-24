@@ -281,7 +281,19 @@ export const CONFIG = {
                 }, {
                     name: "proxy",
                     type: "string",
-                    help_text: "Прокси в формате schema://user:password@host:port Подддерживаеются http, https и socks5 прокси"
+                    help_text: "Прокси в формате scheme://user:password@host:port Подддерживаеются http, https и socks5 прокси"
+                }]
+            },
+            {
+                name: "set_proxy",
+                description: "Изменение прокси для бота. Нужны права администратора.",
+                params: [{
+                    name: "username",
+                    type: "string"
+                }, {
+                    name: "proxy",
+                    type: "string",
+                    help_text: "Прокси в формате scheme://user:password@host:port Подддерживаеются http, https и socks5 прокси"
                 }]
             }
             ]
