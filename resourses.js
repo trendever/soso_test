@@ -295,6 +295,18 @@ export const CONFIG = {
                     type: "string",
                     help_text: "Прокси в формате scheme://user:password@host:port Подддерживаеются http, https и socks5 прокси"
                 }]
+            },
+            {
+                name: "raw_query",
+                description: "Прямой GET запрос к api инстаграма от имени заданого пользователя. Нужны права администратора.",
+                params: [{
+                    name: "user_id",
+                    type: "string",
+                    help_text: "instagram id интересующего пользователя"
+                }, {
+                    name: "uri",
+                    type: "string",
+                }]
             }
             ]
         },
