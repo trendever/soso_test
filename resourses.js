@@ -882,8 +882,12 @@ export const CONFIG = {
                 params: [{
                     name: "offer_id",
                     type: "number",
-                    required: true,
                     help_text: "ID пакета",
+                }, {
+                    name: "disable",
+                    type: "boolean",
+                    dafault: false,
+                    help_text: "отменяет текущие настройки атопополнения(при этом новый пакет установлен НЕ будет)",
                 }]
             }, {
                 name: "subscribe",
