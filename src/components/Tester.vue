@@ -250,6 +250,8 @@ export default {
           return parseInt(value);
         } else if (_type == "boolean") {
           return value;
+        } else if (_type == "json") {
+          return JSON.parse(value);
         }
       } catch (err) {
         this.error = "Error parse: " +
