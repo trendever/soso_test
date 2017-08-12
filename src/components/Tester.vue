@@ -103,6 +103,8 @@ Vue.filter('to_field', function (value) {
     return "number";
   } else if (type == "boolean") {
     return "checkbox";
+  } else if (type == "json") {
+    return "text";
   }
   console.log("Unsupported param type", type, "of", value);
 });
