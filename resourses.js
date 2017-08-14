@@ -132,12 +132,46 @@ export const CONFIG = {
             }]
         }, {
             name: "edit",
-            description: "Редактирование товара",
+            description: "Редактирование товара. Поля, которые не изменялись отправлять не нужно, за исключением is_sale",
             params: [{
-                name: "product",
-                type: "json",
+                name: "id",
+                type: "number",
                 required: true,
-                default: {id: 123, title: "test"}
+                help_text: "id продукта"
+            }, {
+                name: "title",
+                type: "string",
+                help_text: "заголовок",
+            }, {
+                name: "description",
+                type: "string",
+                help_text: "описание товара(instagram_image_caption)"
+            }, {
+                name: "instagram_url",
+                type: "string",
+                help_text: "линк на пост в инстаграмме(показывается в уведомлениях, больше ни на что не влияет)",
+            }, {
+                name: "web_shop_url",
+                type: "string",
+                help_text: "линк на товар на сайте поставщика"
+            }, {
+                name: "chat_message",
+                type: "string",
+                help_text: "сообщение, отправляемое после основных шаблонов"
+            }, {
+                name: "is_sale",
+                type: "boolean",
+                required: true,
+                help_text: "если истина, продукт будет показан на сайте. нужно указывать, даже если не изменилось",
+            }, {
+                name: "image_url",
+                type: "string",
+                help_text: "новая картинка для товара. api сначала загружает картинку к нам и только потом отправляет запрос ядру, так что выставлять это поле, если не картинка не менялась идея особенно плохая"
+            }, {
+                name: "items",
+                type: "json",
+                help_text: "если не указывать id, то создается новый итем. с удалением всё плохо, т.к. итемы до сих под напрямую линкуются в заказы...",
+                default: [{id: 42, name: "test", price: 42, discount_price: 24}]
             }]
         }]
     },
