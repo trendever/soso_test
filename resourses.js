@@ -130,6 +130,15 @@ export const CONFIG = {
                 type: "number",
                 required: true
             }]
+        }, {
+            name: "edit",
+            description: "Редактирование товара",
+            params: [{
+                name: "product",
+                type: "json",
+                required: true,
+                default: {id: 123, title: "test"}
+            }]
         }]
     },
 
