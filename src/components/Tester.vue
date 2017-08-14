@@ -54,7 +54,7 @@
                 id='field_{{ param.name }}',
                 @keypress.enter.prevent="Send()",
                 v-model='param.value',
-                :value='param.default')
+                :value='getDefault(param)')
           .help_text {{param.help_text}}
 
       .description
@@ -163,6 +163,12 @@ export default {
     );
   },
   methods: {
+    getDefault(param){
+      if (param.type == 'json'){
+        return JSON.stringify(param.default)
+      }
+      return param.default;
+    },
     InitSock: function(){
       this.soso = new SoSo(this.socket_url.url);
       this.soso.ondirectmsg = this.receiveDirectMsg;
