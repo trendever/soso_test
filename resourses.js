@@ -132,7 +132,7 @@ export const CONFIG = {
             }]
         }, {
             name: "edit",
-            description: "Редактирование товара. Поля, которые не изменялись отправлять не нужно, за исключением is_sale",
+            description: "Редактирование товара. Стоит передавать объект, полученный через product/retrieve с нужными изменениями. Поля, которых нет в описании, невозможно изменить через этот вызов.",
             params: [{
                 name: "id",
                 type: "number",
@@ -143,35 +143,38 @@ export const CONFIG = {
                 type: "string",
                 help_text: "заголовок",
             }, {
-                name: "description",
+                name: "code",
                 type: "string",
-                help_text: "описание товара(instagram_image_caption)"
+                help_text: "обычно код привязан к id продукта. возможно, стоит запретить редактирование"
             }, {
-                name: "instagram_url",
+                name: "instagram_image_caption",
                 type: "string",
-                help_text: "линк на пост в инстаграмме(показывается в уведомлениях, больше ни на что не влияет)",
+                help_text: "описание товара"
             }, {
-                name: "web_shop_url",
+                name: "instagram_image_url",
                 type: "string",
-                help_text: "линк на товар на сайте поставщика"
+                help_text: "картинка товара. instagram_images обновляются при её смене"
+            }, {
+                name: "instagram_link",
+                type: "string",
+                help_text: "линк на пост в инстаграмме",
             }, {
                 name: "chat_message",
                 type: "string",
                 help_text: "сообщение, отправляемое после основных шаблонов"
             }, {
-                name: "is_sale",
-                type: "boolean",
-                required: true,
-                help_text: "если истина, продукт будет показан на сайте. нужно указывать, даже если не изменилось",
-            }, {
-                name: "image_url",
+                name: "web_shop_url",
                 type: "string",
-                help_text: "новая картинка для товара. api сначала загружает картинку к нам и только потом отправляет запрос ядру, так что выставлять это поле, если не картинка не менялась идея особенно плохая"
+                help_text: "линк на товар на сайте поставщика"
+            }, {
+                name: "isSale",
+                type: "boolean",
+                help_text: "если истина, продукт будет показан на сайте",
             }, {
                 name: "items",
                 type: "json",
-                help_text: "если не указывать id, то создается новый итем. с удалением всё плохо, т.к. итемы до сих под напрямую линкуются в заказы...",
-                default: [{id: 42, name: "test", price: 42, discount_price: 24}]
+                help_text: "если не указывать id, то создается новый итем. с удалением всё плохо, т.к. итемы до сих под напрямую линкуются в заказы... в тегах достаточно указывать только их id, остальные поля игнорируются",
+                default: [{id: 42, name: "test", price: 42, discount_price: 24, tags: [{id: 1}, {id: 2}]}]
             }]
         }]
     },
@@ -212,15 +215,15 @@ export const CONFIG = {
             {
                 name: "create",
                 description: "Создать карту магазина",
-                params: [{ 
+                params: [{
                     name: "shop_id",
                     type: "number",
                     default: 0
-                }, { 
+                }, {
                     name: "card_name",
                     type: "string",
                     default: ""
-                }, { 
+                }, {
                     name: "card_number",
                     type: "string",
                     default: ""
@@ -228,7 +231,7 @@ export const CONFIG = {
             }, {
                 name: "delete",
                 description: "Удалить карту по ID",
-                params: [{ 
+                params: [{
                     name: "card_id",
                     type: "number",
                     default: 0
