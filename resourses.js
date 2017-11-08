@@ -343,6 +343,17 @@ export const CONFIG = {
                 }]
             },
             {
+                name: "set_debug",
+                description: "Включение/выключение отладочных сообщений",
+                params: [{
+                    name: "username",
+                    type: "string"
+                }, {
+                    name: "debug",
+                    type: "boolean",
+                }]
+            },
+            {
                 name: "raw_query",
                 description: "Прямой GET запрос к api инстаграма от имени заданого пользователя. Нужны права администратора.",
                 params: [{
