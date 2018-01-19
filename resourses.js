@@ -364,6 +364,18 @@ export const CONFIG = {
                     name: "uri",
                     type: "string",
                 }]
+            },
+            {
+                name: "invalidate",
+                description: "Отключить бота",
+                params: [{
+                    name: "username",
+                    type: "string"
+                }, {
+                    name: "force",
+                    type: "boolean",
+                    help_text: "позволяет админам выключать чужих ботов",
+                }]
             }
             ]
         },
