@@ -459,48 +459,52 @@ export const CONFIG = {
         {
             name: "lead",
             actions: [{
-                "name": "create",
+                name: "create",
                 description: "Создает или находит существующий заказ и выподлняет действие, заднанное в action, с переданным товром в контексте этого заказа.",
-                "params": [{
-                    "name": "id",
-                    "type": "number",
-                    "help_text": "ID продукта. Например: 42",
-                    "required": true
+                params: [{
+                    name: "id",
+                    type: "number",
+                    help_text: "ID продукта. Например: 42",
+                    required: true
                 }, {
-                    "name": "action",
-                    "type": "number",
-                    "help_text": "Код типа действия. 0(по умолчанию) - покупка, 1 - запрос информации в чат"
+                    name: "action",
+                    type: "number",
+                    help_text: "Код типа действия. 0(по умолчанию) - покупка, 1 - запрос информации в чат"
                 }]
             }, {
-                "name": "list",
+                name: "list",
                 description: "Возвращает список лидов пользователя с информацией о продуктах и чату",
-                "params": [{
-                    "name": "limit",
-                    "type": "number",
-                    "help_text": "Сколько лидов за раз вернуть, по умолчанию 20"
+                params: [{
+                    name: "limit",
+                    type: "number",
+                    help_text: "Сколько лидов за раз вернуть, по умолчанию 20"
                 }, {
-                    "name": "from_updated_at",
-                    "type": "number",
-                    "help_text": "Время обновления от которого нужно возвращать лиды. Используйте 0 чтобы получить самые свежии лиды, а затем используйте update_at последнего в списке для получения следующей страницы"
+                    name: "from_updated_at",
+                    type: "number",
+                    help_text: "Время обновления от которого нужно возвращать лиды. Используйте 0 чтобы получить самые свежии лиды, а затем используйте update_at последнего в списке для получения следующей страницы"
                 },{
-                    "name": "direction",
-                    "type": "boolean",
-                    "help_text": "Направление сортировки true - asc, false - desc"
+                    name: "direction",
+                    type: "boolean",
+                    help_text: "Направление сортировки true - asc, false - desc"
                 },
                     {
-                    "name": "roles",
-                    "type": "string",
-                    "help_text": "Список ролей через запятую, возможные роли: seller, customer, supplier. Если ни одна из ролей не передана, будет возвращено две группы лидов: customer(только лиды где юзер customer) и seller(где юзер seller, supplier или super_seller)"
+                    name: "roles",
+                    type: "string",
+                    help_text: "Список ролей через запятую, возможные роли: seller, customer, supplier. Если ни одна из ролей не передана, будет возвращено две группы лидов: customer(только лиды где юзер customer) и seller(где юзер seller, supplier или super_seller)"
+                }, {
+                  name: "shop_id",
+                  type: "number",
+                  help_text: "Отфильтровать заказы по магазину"
                 }]
             }, {
-                "name": "retrieve",
+                name: "retrieve",
                 description: "Возвращает полную информацию о lead, по его lead_id или conversation_id",
-                "params": [{
-                    "name": "lead_id",
-                    "type": "number"
+                params: [{
+                    name: "lead_id",
+                    type: "number"
                 }, {
-                    "name": "conversation_id",
-                    "type": "number"
+                    name: "conversation_id",
+                    type: "number"
                 }]
             }, {
                 name: "event",
