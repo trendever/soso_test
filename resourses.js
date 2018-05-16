@@ -791,47 +791,6 @@ export const CONFIG = {
             ]
         },
         {
-            name: "push_tokens",
-            description: "api для работы с пуш-токенами пользователя",
-            actions: [
-                {
-                    name: "add",
-                    description: "Добавляет токен",
-                    params: [{
-                        name: "token",
-                        type: "string",
-                        required: true
-                    },
-                    {
-                        name: "type",
-                        type: "string",
-                        required: true,
-                        help_text: "iphone либо android"
-                    },
-                    {
-                        name: "about",
-                        type: "string",
-                        help_text: "По этому полю пользователю должно быть понятно, к какому устройству относится токен"
-                    }]
-                },
-                {
-                    name: "del",
-                    description: "Удаляет токен",
-                    params: [{
-                        name: "token_id",
-                        type: "number",
-                        required: true,
-                        help_text: "id токена"
-                    }]
-                },
-                {
-                    name: "get",
-                    description: "Возвращает список токенов текущего пользователя",
-                    params: []
-                }
-            ]
-        },
-        {
             name: "shop",
             description: "Профиль магазина",
             actions: [
