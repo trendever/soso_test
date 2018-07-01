@@ -495,6 +495,10 @@ export const CONFIG = {
                 name: "shop_id",
                 type: "number",
                 help_text: "Отфильтровать заказы по магазину"
+            }, {
+                name: "tags",
+                type: "number|array",
+                help_text: "Ограничить выборку заказами, в которых есть хотя бы один предмет с переданным набором тегов"
             }]
         }, {
             name: "retrieve",
